@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Icon from '../ui/AppIcon';
 import AppImage from '../ui/AppImage';
-import logo from '../../../assets/logo.png';
+import logo from '../../../assets/logo_footer.png';
 
 const Footer = () => {
     const productLinks = [
