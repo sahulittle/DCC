@@ -12,7 +12,7 @@ const PricingContent = () => {
       id: 'plan_individual',
       name: 'Individual',
       description: 'Fixed annual membership for individuals',
-      annualPrice: 119.99,
+      annualPrice: 'TBD',
       priceNote: 'Fixed rate',
       features: [
         'Access to all discounts',
@@ -31,7 +31,7 @@ const PricingContent = () => {
       id: 'plan_business',
       name: 'Business',
       description: 'Annual membership per employee',
-      annualPrice: 'EDT',
+      annualPrice: 'TBD',
       priceNote: 'Starting at',
       features: [
         'All Individual features',
@@ -50,7 +50,7 @@ const PricingContent = () => {
       id: 'plan_association',
       name: 'Association',
       description: 'Annual membership per member',
-      annualPrice: 'EDT',
+      annualPrice: 'TBD',
       priceNote: 'Starting at',
       features: [
         'All Individual features',
@@ -169,11 +169,12 @@ const PricingContent = () => {
                   )}
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="text-5xl font-heading font-bold text-slate-900 tracking-tight">
-                      ${Math.floor(plan?.annualPrice)}
+                      $ TBD
+                      {/* {Math.floor(plan?.annualPrice)} */}
                     </span>
-                    <span className="text-2xl font-heading font-bold text-slate-900">
+                    {/* <span className="text-2xl font-heading font-bold text-slate-900">
                       .{(plan?.annualPrice % 1).toFixed(2).substring(2)}
-                    </span>
+                    </span> */}
                   </div>
                   <span className="text-slate-500 font-medium mt-2 block">
                     /member/year

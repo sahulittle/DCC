@@ -36,14 +36,14 @@ const Footer = () => {
    <footer className="bg-slate-50 border-t border-slate-200 pt-20 pb-12">
       <div className="max-w-7xl mx-auto px-6">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16">
           {/* Brand Column */}
-          <div className="space-y-6">
+          <div className="col-span-2 lg:col-span-1 space-y-6">
             <div className="flex items-center gap-3">
               <AppImage
                 src={logo}
                 alt="Discount Club Cayman Logo"
-                className="w-52 h-52 object-contain"
+                className="h-20 scale-110"
               />
             </div>
             <p className="text-sm text-slate-500 leading-relaxed max-w-xs">
