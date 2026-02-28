@@ -76,98 +76,104 @@ const BusinessDashboardContent = () => {
     { month: 'Dec', views: 1240, saves: 342, redemptions: 28 },
   ];
   return (
-     <div className="min-h-screen bg-background py-12">
-      <div className="max-w-7xl mx-auto px-6">
+    <div className="min-h-screen bg-slate-50/50">
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-100/40 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Welcome Header */}
-        <div className="mb-8">
-          <h1 className="font-heading text-4xl font-bold text-foreground mb-2">
-            Welcome, {businessData?.name}
+        <div className="mb-10">
+          <h1 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 mb-2">
+            Welcome, <span className="text-[#1C4D8D]">{businessData?.name}</span>
           </h1>
-          <p className="text-xl text-muted-foreground">
-            Your offers reached <span className="text-primary font-semibold">{businessData?.profileViews}</span> members this month
+          <p className="text-lg text-slate-600">
+            Your offers reached <span className="text-[#1C4D8D] font-bold">{businessData?.profileViews}</span> members this month
           </p>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 border border-border">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-muted-foreground">Profile Views</p>
-              <Icon name="EyeIcon" size={20} className="text-primary" />
+              <p className="text-sm font-medium text-slate-500">Profile Views</p>
+              <div className="p-2 bg-blue-50 rounded-lg"><Icon name="EyeIcon" size={20} className="text-[#1C4D8D]" /></div>
             </div>
-            <p className="text-3xl font-heading font-bold text-foreground">
+            <p className="text-3xl font-heading font-bold text-slate-900">
               {businessData?.profileViews}
             </p>
-            <p className="text-xs text-success mt-1">+12% from last month</p>
+            <p className="text-xs font-medium text-emerald-600 mt-1 flex items-center gap-1"><Icon name="ArrowTrendingUpIcon" size={12} /> +12% from last month</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 border border-border">
+          <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-muted-foreground">Offer Saves</p>
-              <Icon name="BookmarkIcon" size={20} className="text-primary" />
+              <p className="text-sm font-medium text-slate-500">Offer Saves</p>
+              <div className="p-2 bg-purple-50 rounded-lg"><Icon name="BookmarkIcon" size={20} className="text-purple-600" /></div>
             </div>
-            <p className="text-3xl font-heading font-bold text-foreground">
+            <p className="text-3xl font-heading font-bold text-slate-900">
               {businessData?.offerSaves}
             </p>
-            <p className="text-xs text-success mt-1">+18% from last month</p>
+            <p className="text-xs font-medium text-emerald-600 mt-1 flex items-center gap-1"><Icon name="ArrowTrendingUpIcon" size={12} /> +18% from last month</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 border border-border">
+          <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-muted-foreground">Redemptions</p>
-              <Icon name="CheckCircleIcon" size={20} className="text-primary" />
+              <p className="text-sm font-medium text-slate-500">Redemptions</p>
+              <div className="p-2 bg-emerald-50 rounded-lg"><Icon name="CheckCircleIcon" size={20} className="text-emerald-600" /></div>
             </div>
-            <p className="text-3xl font-heading font-bold text-foreground">
+            <p className="text-3xl font-heading font-bold text-slate-900">
               {businessData?.certificateRedemptions}
             </p>
-            <p className="text-xs text-success mt-1">+8% from last month</p>
+            <p className="text-xs font-medium text-emerald-600 mt-1 flex items-center gap-1"><Icon name="ArrowTrendingUpIcon" size={12} /> +8% from last month</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 border border-border">
+          <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-muted-foreground">Engagement Rate</p>
-              <Icon name="ChartBarIcon" size={20} className="text-primary" />
+              <p className="text-sm font-medium text-slate-500">Engagement Rate</p>
+              <div className="p-2 bg-orange-50 rounded-lg"><Icon name="ChartBarIcon" size={20} className="text-orange-600" /></div>
             </div>
-            <p className="text-3xl font-heading font-bold text-foreground">
+            <p className="text-3xl font-heading font-bold text-slate-900">
               {businessData?.engagementRate}%
             </p>
-            <p className="text-xs text-success mt-1">+3% from last month</p>
+            <p className="text-xs font-medium text-emerald-600 mt-1 flex items-center gap-1"><Icon name="ArrowTrendingUpIcon" size={12} /> +3% from last month</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="bg-white rounded-2xl border border-border mb-8">
-          <div className="border-b border-border px-6">
-            <div className="flex gap-8">
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm mb-10 overflow-hidden">
+          <div className="border-b border-slate-100 px-6">
+            <div className="flex gap-8 overflow-x-auto scrollbar-hide">
               <button
                 onClick={() => setActiveTab('overview')}
-                className={`py-4 border-b-2 font-semibold transition-colors ${
-                  activeTab === 'overview' ?'border-primary text-primary' :'border-transparent text-muted-foreground hover:text-foreground'
+                className={`py-4 border-b-2 font-semibold transition-colors whitespace-nowrap ${
+                  activeTab === 'overview' ?'border-[#1C4D8D] text-[#1C4D8D]' :'border-transparent text-slate-500 hover:text-slate-900'
                 }`}
               >
                 Overview
               </button>
               <button
                 onClick={() => setActiveTab('offers')}
-                className={`py-4 border-b-2 font-semibold transition-colors ${
-                  activeTab === 'offers' ?'border-primary text-primary' :'border-transparent text-muted-foreground hover:text-foreground'
+                className={`py-4 border-b-2 font-semibold transition-colors whitespace-nowrap ${
+                  activeTab === 'offers' ?'border-[#1C4D8D] text-[#1C4D8D]' :'border-transparent text-slate-500 hover:text-slate-900'
                 }`}
               >
                 Offers
               </button>
               <button
                 onClick={() => setActiveTab('certificates')}
-                className={`py-4 border-b-2 font-semibold transition-colors ${
+                className={`py-4 border-b-2 font-semibold transition-colors whitespace-nowrap ${
                   activeTab === 'certificates'
-                    ? 'border-primary text-primary' :'border-transparent text-muted-foreground hover:text-foreground'
+                    ? 'border-[#1C4D8D] text-[#1C4D8D]' :'border-transparent text-slate-500 hover:text-slate-900'
                 }`}
               >
                 Certificates
               </button>
               <button
                 onClick={() => setActiveTab('banners')}
-                className={`py-4 border-b-2 font-semibold transition-colors ${
-                  activeTab === 'banners' ?'border-primary text-primary' :'border-transparent text-muted-foreground hover:text-foreground'
+                className={`py-4 border-b-2 font-semibold transition-colors whitespace-nowrap ${
+                  activeTab === 'banners' ?'border-[#1C4D8D] text-[#1C4D8D]' :'border-transparent text-slate-500 hover:text-slate-900'
                 }`}
               >
                 Banners
@@ -181,10 +187,10 @@ const BusinessDashboardContent = () => {
               <div className="space-y-8">
                 {/* Analytics Chart */}
                 <div>
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-6">
+                  <h3 className="font-heading text-xl font-bold text-slate-900 mb-6">
                     Performance Overview
                   </h3>
-                  <div className="bg-muted/30 rounded-xl p-6">
+                  <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                     <div className="h-80 flex items-end justify-between gap-3 sm:gap-4 md:gap-6">
                       {chartData?.map((data, index) => (
                         <div key={`chart_${index}`} className="flex-1 flex flex-col items-center gap-3">
@@ -193,11 +199,11 @@ const BusinessDashboardContent = () => {
                             {/* Views Bar */}
                             <div className="flex flex-col items-center gap-1 flex-1">
                               <div className="w-full flex flex-col items-center">
-                                <span className="text-xs font-semibold text-primary mb-1">
+                                <span className="text-xs font-semibold text-[#1C4D8D] mb-1">
                                   {data?.views}
                                 </span>
                                 <div
-                                  className="w-full bg-primary rounded-t transition-all hover:opacity-80"
+                                  className="w-full bg-[#1C4D8D] rounded-t-lg transition-all hover:opacity-80"
                                   style={{ height: `${(data?.views / 1500) * 200}px`, minHeight: '20px' }}
                                 />
                               </div>
@@ -206,11 +212,11 @@ const BusinessDashboardContent = () => {
                             {/* Saves Bar */}
                             <div className="flex flex-col items-center gap-1 flex-1">
                               <div className="w-full flex flex-col items-center">
-                                <span className="text-xs font-semibold text-secondary mb-1">
+                                <span className="text-xs font-semibold text-[#4988C4] mb-1">
                                   {data?.saves}
                                 </span>
                                 <div
-                                  className="w-full bg-secondary rounded-t transition-all hover:opacity-80"
+                                  className="w-full bg-[#4988C4] rounded-t-lg transition-all hover:opacity-80"
                                   style={{ height: `${(data?.saves / 400) * 200}px`, minHeight: '20px' }}
                                 />
                               </div>
@@ -219,11 +225,11 @@ const BusinessDashboardContent = () => {
                             {/* Redemptions Bar */}
                             <div className="flex flex-col items-center gap-1 flex-1">
                               <div className="w-full flex flex-col items-center">
-                                <span className="text-xs font-semibold text-accent mb-1">
+                                <span className="text-xs font-semibold text-[#4988C4] mb-1">
                                   {data?.redemptions}
                                 </span>
                                 <div
-                                  className="w-full bg-accent rounded-t transition-all hover:opacity-80"
+                                  className="w-full bg-[#BDE8F5] rounded-t-lg transition-all hover:opacity-80"
                                   style={{ height: `${(data?.redemptions / 30) * 200}px`, minHeight: '20px' }}
                                 />
                               </div>
@@ -231,7 +237,7 @@ const BusinessDashboardContent = () => {
                           </div>
                           
                           {/* Month Label */}
-                          <p className="text-sm font-bold text-foreground">
+                          <p className="text-sm font-bold text-slate-600">
                             {data?.month}
                           </p>
                         </div>
@@ -239,18 +245,18 @@ const BusinessDashboardContent = () => {
                     </div>
                     
                     {/* Legend */}
-                    <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-8 pt-6 border-t border-border">
+                    <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-8 pt-6 border-t border-slate-200">
                       <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 bg-primary rounded" />
-                        <span className="text-sm font-medium text-foreground">Profile Views</span>
+                        <div className="w-4 h-4 bg-[#1C4D8D] rounded-full" />
+                        <span className="text-sm font-medium text-slate-600">Profile Views</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 bg-secondary rounded" />
-                        <span className="text-sm font-medium text-foreground">Offer Saves</span>
+                        <div className="w-4 h-4 bg-[#4988C4] rounded-full" />
+                        <span className="text-sm font-medium text-slate-600">Offer Saves</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 bg-accent rounded" />
-                        <span className="text-sm font-medium text-foreground">Redemptions</span>
+                        <div className="w-4 h-4 bg-[#BDE8F5] rounded-full" />
+                        <span className="text-sm font-medium text-slate-600">Redemptions</span>
                       </div>
                     </div>
                   </div>
@@ -258,27 +264,27 @@ const BusinessDashboardContent = () => {
 
                 {/* Quick Actions */}
                 <div>
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-4">
+                  <h3 className="font-heading text-xl font-bold text-slate-900 mb-4">
                     Quick Actions
                   </h3>
                   <div className="grid md:grid-cols-2 gap-4">
-                    <button className="flex items-center gap-4 p-4 border-2 border-border rounded-xl hover:border-primary hover:shadow-sm transition-all">
-                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                        <Icon name="PlusIcon" size={24} className="text-primary" />
+                    <button className="flex items-center gap-4 p-5 border border-slate-200 rounded-2xl hover:border-[#1C4D8D] hover:shadow-md transition-all bg-white group">
+                      <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Icon name="PlusIcon" size={24} className="text-[#1C4D8D]" />
                       </div>
                       <div className="text-left">
-                        <p className="font-semibold text-foreground">Create New Offer</p>
-                        <p className="text-sm text-muted-foreground">Add a discount</p>
+                        <p className="font-bold text-slate-900 group-hover:text-[#1C4D8D] transition-colors">Create New Offer</p>
+                        <p className="text-sm text-slate-500">Add a discount</p>
                       </div>
                     </button>
 
-                    <button className="flex items-center gap-4 p-4 border-2 border-border rounded-xl hover:border-primary hover:shadow-sm transition-all">
-                      <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center">
-                        <Icon name="TicketIcon" size={24} className="text-secondary" />
+                    <button className="flex items-center gap-4 p-5 border border-slate-200 rounded-2xl hover:border-[#4988C4] hover:shadow-md transition-all bg-white group">
+                      <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Icon name="TicketIcon" size={24} className="text-[#4988C4]" />
                       </div>
                       <div className="text-left">
-                        <p className="font-semibold text-foreground">Create Certificate</p>
-                        <p className="text-sm text-muted-foreground">Add a voucher</p>
+                        <p className="font-bold text-slate-900 group-hover:text-[#4988C4] transition-colors">Create Certificate</p>
+                        <p className="text-sm text-slate-500">Add a voucher</p>
                       </div>
                     </button>
                   </div>
@@ -290,69 +296,69 @@ const BusinessDashboardContent = () => {
             {activeTab === 'offers' && (
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-heading text-xl font-bold text-foreground">
+                  <h3 className="font-heading text-xl font-bold text-slate-900">
                     Active Offers
                   </h3>
-                  <button className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all flex items-center gap-2">
+                  <button className="px-6 py-2.5 bg-[#1C4D8D] text-white rounded-xl font-bold hover:bg-[#1C4D8D]/90 transition-all flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
                     <Icon name="PlusIcon" size={18} />
                     Create Offer
                   </button>
                 </div>
 
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto rounded-xl border border-slate-200">
                   <table className="w-full">
-                    <thead className="border-b border-border">
+                    <thead className="bg-slate-50 border-b border-slate-200">
                       <tr>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Offer Title
                         </th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Type
                         </th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Duration
                         </th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Views
                         </th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Saves
                         </th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Actions
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="divide-y divide-slate-100">
                       {activeOffers?.map((offer) => (
-                        <tr key={offer?.id} className="border-b border-border hover:bg-muted/50">
-                          <td className="py-4 px-4">
-                            <p className="font-semibold text-foreground">{offer?.title}</p>
+                        <tr key={offer?.id} className="hover:bg-slate-50/80 transition-colors">
+                          <td className="py-4 px-6">
+                            <p className="font-semibold text-slate-900">{offer?.title}</p>
                           </td>
-                          <td className="py-4 px-4">
-                            <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold">
+                          <td className="py-4 px-6">
+                            <span className="px-3 py-1 bg-blue-50 text-[#1C4D8D] rounded-full text-xs font-bold">
                               {offer?.type === 'percentage' ? `${offer?.value}% off` : 'Fixed'}
                             </span>
                           </td>
-                          <td className="py-4 px-4 text-sm text-muted-foreground">
+                          <td className="py-4 px-6 text-sm text-slate-500">
                             {offer?.startDate} to {offer?.endDate}
                           </td>
-                          <td className="py-4 px-4 text-sm text-foreground font-semibold">
+                          <td className="py-4 px-6 text-sm text-slate-900 font-semibold">
                             {offer?.views}
                           </td>
-                          <td className="py-4 px-4 text-sm text-foreground font-semibold">
+                          <td className="py-4 px-6 text-sm text-slate-900 font-semibold">
                             {offer?.saves}
                           </td>
-                          <td className="py-4 px-4">
+                          <td className="py-4 px-6">
                             <div className="flex items-center gap-2">
-                              <button className="p-2 hover:bg-muted rounded-lg transition-colors">
-                                <Icon name="PencilIcon" size={16} className="text-muted-foreground" />
+                              <button className="p-2 hover:bg-blue-50 text-slate-400 hover:text-[#1C4D8D] rounded-lg transition-colors">
+                                <Icon name="PencilIcon" size={18} />
                               </button>
-                              <button className="p-2 hover:bg-muted rounded-lg transition-colors">
-                                <Icon name="PauseIcon" size={16} className="text-muted-foreground" />
+                              <button className="p-2 hover:bg-orange-50 text-slate-400 hover:text-orange-500 rounded-lg transition-colors">
+                                <Icon name="PauseIcon" size={18} />
                               </button>
-                              <button className="p-2 hover:bg-muted rounded-lg transition-colors">
-                                <Icon name="TrashIcon" size={16} className="text-error" />
+                              <button className="p-2 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-lg transition-colors">
+                                <Icon name="TrashIcon" size={18} />
                               </button>
                             </div>
                           </td>
@@ -368,64 +374,64 @@ const BusinessDashboardContent = () => {
             {activeTab === 'certificates' && (
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-heading text-xl font-bold text-foreground">
+                  <h3 className="font-heading text-xl font-bold text-slate-900">
                     Active Certificates
                   </h3>
-                  <button className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all flex items-center gap-2">
+                  <button className="px-6 py-2.5 bg-[#1C4D8D] text-white rounded-xl font-bold hover:bg-[#1C4D8D]/90 transition-all flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
                     <Icon name="PlusIcon" size={18} />
                     Create Certificate
                   </button>
                 </div>
 
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto rounded-xl border border-slate-200">
                   <table className="w-full">
-                    <thead className="border-b border-border">
+                    <thead className="bg-slate-50 border-b border-slate-200">
                       <tr>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Certificate Title
                         </th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Face Value
                         </th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Member Price
                         </th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Sold
                         </th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Redeemed
                         </th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-muted-foreground">
+                        <th className="text-left py-4 px-6 text-sm font-bold text-slate-600">
                           Actions
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="divide-y divide-slate-100">
                       {activeCertificates?.map((cert) => (
-                        <tr key={cert?.id} className="border-b border-border hover:bg-muted/50">
-                          <td className="py-4 px-4">
-                            <p className="font-semibold text-foreground">{cert?.title}</p>
+                        <tr key={cert?.id} className="hover:bg-slate-50/80 transition-colors">
+                          <td className="py-4 px-6">
+                            <p className="font-semibold text-slate-900">{cert?.title}</p>
                           </td>
-                          <td className="py-4 px-4 text-sm text-foreground font-semibold">
+                          <td className="py-4 px-6 text-sm text-slate-900 font-semibold">
                             ${cert?.faceValue}
                           </td>
-                          <td className="py-4 px-4 text-sm text-primary font-semibold">
+                          <td className="py-4 px-6 text-sm text-[#1C4D8D] font-bold">
                             ${cert?.memberPrice}
                           </td>
-                          <td className="py-4 px-4 text-sm text-foreground font-semibold">
+                          <td className="py-4 px-6 text-sm text-slate-900 font-semibold">
                             {cert?.sold}
                           </td>
-                          <td className="py-4 px-4 text-sm text-success font-semibold">
+                          <td className="py-4 px-6 text-sm text-emerald-600 font-bold">
                             {cert?.redeemed}
                           </td>
-                          <td className="py-4 px-4">
+                          <td className="py-4 px-6">
                             <div className="flex items-center gap-2">
-                              <button className="p-2 hover:bg-muted rounded-lg transition-colors">
-                                <Icon name="PencilIcon" size={16} className="text-muted-foreground" />
+                              <button className="p-2 hover:bg-blue-50 text-slate-400 hover:text-[#1C4D8D] rounded-lg transition-colors">
+                                <Icon name="PencilIcon" size={18} />
                               </button>
-                              <button className="p-2 hover:bg-muted rounded-lg transition-colors">
-                                <Icon name="PauseIcon" size={16} className="text-muted-foreground" />
+                              <button className="p-2 hover:bg-orange-50 text-slate-400 hover:text-orange-500 rounded-lg transition-colors">
+                                <Icon name="PauseIcon" size={18} />
                               </button>
                             </div>
                           </td>
@@ -441,7 +447,7 @@ const BusinessDashboardContent = () => {
             {activeTab === 'banners' && (
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-heading text-xl font-bold text-foreground">
+                  <h3 className="font-heading text-xl font-bold text-slate-900">
                     Advertising Banners
                   </h3>
                   <button 
@@ -449,7 +455,7 @@ const BusinessDashboardContent = () => {
                       setShowBannerModal(true);
                       setPaymentStep('details');
                     }}
-                    className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all flex items-center gap-2"
+                    className="px-6 py-2.5 bg-[#1C4D8D] text-white rounded-xl font-bold hover:bg-[#1C4D8D]/90 transition-all flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                   >
                     <Icon name="PlusIcon" size={18} />
                     Purchase Banner
@@ -458,64 +464,64 @@ const BusinessDashboardContent = () => {
 
                 {/* Banner Pricing Info */}
                 <div className="grid md:grid-cols-3 gap-6">
-                  <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 border border-primary/20">
+                  <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 border border-blue-100 shadow-sm hover:shadow-md transition-all">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                      <div className="w-10 h-10 bg-[#1C4D8D] rounded-lg flex items-center justify-center">
                         <Icon name="SparklesIcon" size={20} className="text-white" />
                       </div>
-                      <h4 className="font-heading font-bold text-lg text-foreground">Top Placement</h4>
+                      <h4 className="font-heading font-bold text-lg text-slate-900">Top Placement</h4>
                     </div>
-                    <p className="text-3xl font-heading font-bold text-primary mb-2">$500<span className="text-sm text-muted-foreground">/month</span></p>
-                    <p className="text-sm text-muted-foreground mb-4">728x200px • Premium visibility</p>
-                    <ul className="space-y-2 text-sm text-foreground">
+                    <p className="text-3xl font-heading font-bold text-[#1C4D8D] mb-2">$500<span className="text-sm text-slate-500 font-normal">/month</span></p>
+                    <p className="text-sm text-slate-600 mb-6">728x200px • Premium visibility</p>
+                    <ul className="space-y-3 text-sm text-slate-700">
                       <li className="flex items-center gap-2">
-                        <Icon name="CheckCircleIcon" size={16} className="text-success" />
+                        <Icon name="CheckCircleIcon" size={18} className="text-emerald-500" />
                         10% off 6-month plan
                       </li>
                       <li className="flex items-center gap-2">
-                        <Icon name="CheckCircleIcon" size={16} className="text-success" />
+                        <Icon name="CheckCircleIcon" size={18} className="text-emerald-500" />
                         15% off annual plan
                       </li>
                     </ul>
                   </div>
 
-                  <div className="bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-xl p-6 border border-secondary/20">
+                  <div className="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-6 border border-purple-100 shadow-sm hover:shadow-md transition-all">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center">
+                      <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center">
                         <Icon name="StarIcon" size={20} className="text-white" />
                       </div>
-                      <h4 className="font-heading font-bold text-lg text-foreground">Mid Placement</h4>
+                      <h4 className="font-heading font-bold text-lg text-slate-900">Mid Placement</h4>
                     </div>
-                    <p className="text-3xl font-heading font-bold text-secondary mb-2">$350<span className="text-sm text-muted-foreground">/month</span></p>
-                    <p className="text-sm text-muted-foreground mb-4">728x200px • Great exposure</p>
-                    <ul className="space-y-2 text-sm text-foreground">
+                    <p className="text-3xl font-heading font-bold text-purple-600 mb-2">$350<span className="text-sm text-slate-500 font-normal">/month</span></p>
+                    <p className="text-sm text-slate-600 mb-6">728x200px • Great exposure</p>
+                    <ul className="space-y-3 text-sm text-slate-700">
                       <li className="flex items-center gap-2">
-                        <Icon name="CheckCircleIcon" size={16} className="text-success" />
+                        <Icon name="CheckCircleIcon" size={18} className="text-emerald-500" />
                         10% off 6-month plan
                       </li>
                       <li className="flex items-center gap-2">
-                        <Icon name="CheckCircleIcon" size={16} className="text-success" />
+                        <Icon name="CheckCircleIcon" size={18} className="text-emerald-500" />
                         15% off annual plan
                       </li>
                     </ul>
                   </div>
 
-                  <div className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-xl p-6 border border-accent/20">
+                  <div className="bg-gradient-to-br from-orange-50 to-white rounded-2xl p-6 border border-orange-100 shadow-sm hover:shadow-md transition-all">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
+                      <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
                         <Icon name="BoltIcon" size={20} className="text-white" />
                       </div>
-                      <h4 className="font-heading font-bold text-lg text-foreground">Bottom Placement</h4>
+                      <h4 className="font-heading font-bold text-lg text-slate-900">Bottom Placement</h4>
                     </div>
-                    <p className="text-3xl font-heading font-bold text-accent mb-2">$250<span className="text-sm text-muted-foreground">/month</span></p>
-                    <p className="text-sm text-muted-foreground mb-4">728x200px • Solid reach</p>
-                    <ul className="space-y-2 text-sm text-foreground">
+                    <p className="text-3xl font-heading font-bold text-orange-500 mb-2">$250<span className="text-sm text-slate-500 font-normal">/month</span></p>
+                    <p className="text-sm text-slate-600 mb-6">728x200px • Solid reach</p>
+                    <ul className="space-y-3 text-sm text-slate-700">
                       <li className="flex items-center gap-2">
-                        <Icon name="CheckCircleIcon" size={16} className="text-success" />
+                        <Icon name="CheckCircleIcon" size={18} className="text-emerald-500" />
                         10% off 6-month plan
                       </li>
                       <li className="flex items-center gap-2">
-                        <Icon name="CheckCircleIcon" size={16} className="text-success" />
+                        <Icon name="CheckCircleIcon" size={18} className="text-emerald-500" />
                         15% off annual plan
                       </li>
                     </ul>
@@ -524,20 +530,20 @@ const BusinessDashboardContent = () => {
 
                 {/* My Banners */}
                 <div>
-                  <h4 className="font-heading text-lg font-bold text-foreground mb-4">My Active Banners</h4>
+                  <h4 className="font-heading text-lg font-bold text-slate-900 mb-4">My Active Banners</h4>
                   {myBanners?.length === 0 ? (
-                    <div className="text-center py-12 bg-muted/30 rounded-xl">
-                      <Icon name="PhotoIcon" size={48} className="text-muted-foreground mx-auto mb-4" />
-                      <p className="text-muted-foreground">No active banners yet. Purchase your first banner to get started!</p>
+                    <div className="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+                      <Icon name="PhotoIcon" size={48} className="text-slate-300 mx-auto mb-4" />
+                      <p className="text-slate-500">No active banners yet. Purchase your first banner to get started!</p>
                     </div>
                   ) : (
                     <div className="space-y-4">
                       {myBanners?.map((banner) => (
-                        <div key={banner?.id} className="bg-white rounded-xl p-6 border border-border">
+                        <div key={banner?.id} className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
-                              <h5 className="font-semibold text-foreground mb-2">{banner?.title}</h5>
-                              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                              <h5 className="font-semibold text-slate-900 mb-2">{banner?.title}</h5>
+                              <div className="flex items-center gap-4 text-sm text-slate-500">
                                 <span className="flex items-center gap-1">
                                   <Icon name="MapPinIcon" size={14} />
                                   {banner?.position} placement
@@ -547,7 +553,7 @@ const BusinessDashboardContent = () => {
                                   {new Date(banner?.start_date).toLocaleDateString()} - {new Date(banner?.end_date).toLocaleDateString()}
                                 </span>
                                 <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                                  banner?.is_active ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground'
+                                  banner?.is_active ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-100 text-slate-500'
                                 }`}>
                                   {banner?.is_active ? 'Active' : 'Inactive'}
                                 </span>
@@ -566,10 +572,10 @@ const BusinessDashboardContent = () => {
 
         {/* Banner Purchase Modal */}
         {showBannerModal && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="p-6 border-b border-border flex items-center justify-between">
-                <h3 className="font-heading text-2xl font-bold text-foreground">
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+              <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                <h3 className="font-heading text-2xl font-bold text-slate-900">
                   {paymentStep === 'details' ? 'Purchase Banner Ad' : 'Complete Payment'}
                 </h3>
                 <button 
@@ -580,9 +586,9 @@ const BusinessDashboardContent = () => {
                     setBannerLinkUrl('');
                     setPaymentStep('details');
                   }}
-                  className="p-2 hover:bg-muted rounded-lg transition-colors"
+                  className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-500"
                 >
-                  <Icon name="XMarkIcon" size={24} className="text-muted-foreground" />
+                  <Icon name="XMarkIcon" size={24} />
                 </button>
               </div>
 
@@ -591,7 +597,7 @@ const BusinessDashboardContent = () => {
                   <div className="space-y-6">
                     {/* Banner Details Form */}
                     <div>
-                      <label className="block text-sm font-semibold text-foreground mb-2">
+                      <label className="block text-sm font-bold text-slate-700 mb-2">
                         Banner Title *
                       </label>
                       <input
@@ -599,12 +605,12 @@ const BusinessDashboardContent = () => {
                         value={bannerTitle}
                         onChange={(e) => setBannerTitle(e.target.value)}
                         placeholder="Enter banner title"
-                        className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]/20 focus:border-[#1C4D8D] transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-foreground mb-2">
+                      <label className="block text-sm font-bold text-slate-700 mb-2">
                         Banner Image URL
                       </label>
                       <input
@@ -612,12 +618,12 @@ const BusinessDashboardContent = () => {
                         value={bannerImageUrl}
                         onChange={(e) => setBannerImageUrl(e.target.value)}
                         placeholder="https://example.com/banner.jpg (728x200px)"
-                        className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]/20 focus:border-[#1C4D8D] transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-foreground mb-2">
+                      <label className="block text-sm font-bold text-slate-700 mb-2">
                         Link URL
                       </label>
                       <input
@@ -625,12 +631,12 @@ const BusinessDashboardContent = () => {
                         value={bannerLinkUrl}
                         onChange={(e) => setBannerLinkUrl(e.target.value)}
                         placeholder="https://your-website.com"
-                        className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]/20 focus:border-[#1C4D8D] transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-foreground mb-2">
+                      <label className="block text-sm font-bold text-slate-700 mb-2">
                         Placement Position *
                       </label>
                       <div className="grid grid-cols-3 gap-3">
@@ -638,13 +644,13 @@ const BusinessDashboardContent = () => {
                           <button
                             key={pos}
                             onClick={() => setSelectedPosition(pos)}
-                            className={`p-4 rounded-lg border-2 transition-all ${
+                            className={`p-4 rounded-xl border-2 transition-all ${
                               selectedPosition === pos
-                                ? 'border-primary bg-primary/10' :'border-border hover:border-primary/50'
+                                ? 'border-[#1C4D8D] bg-[#1C4D8D]/5 shadow-sm' :'border-slate-100 hover:border-[#1C4D8D]/30 bg-white'
                             }`}
                           >
-                            <p className="font-semibold text-foreground capitalize">{pos}</p>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="font-bold text-slate-900 capitalize">{pos}</p>
+                            <p className="text-sm text-slate-500">
                               ${pos === 'top' ? '500' : pos === 'mid' ? '350' : '250'}/mo
                             </p>
                           </button>
@@ -653,7 +659,7 @@ const BusinessDashboardContent = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-foreground mb-2">
+                      <label className="block text-sm font-bold text-slate-700 mb-2">
                         Duration *
                       </label>
                       <div className="grid grid-cols-3 gap-3">
@@ -665,14 +671,14 @@ const BusinessDashboardContent = () => {
                           <button
                             key={dur.value}
                             onClick={() => setSelectedDuration(dur.value)}
-                            className={`p-4 rounded-lg border-2 transition-all ${
+                            className={`p-4 rounded-xl border-2 transition-all ${
                               selectedDuration === dur.value
-                                ? 'border-primary bg-primary/10' :'border-border hover:border-primary/50'
+                                ? 'border-[#1C4D8D] bg-[#1C4D8D]/5 shadow-sm' :'border-slate-100 hover:border-[#1C4D8D]/30 bg-white'
                             }`}
                           >
-                            <p className="font-semibold text-foreground">{dur.label}</p>
+                            <p className="font-bold text-slate-900">{dur.label}</p>
                             {dur.discount > 0 && (
-                              <p className="text-xs text-success font-semibold">Save {dur.discount}%</p>
+                              <p className="text-xs text-emerald-600 font-bold">Save {dur.discount}%</p>
                             )}
                           </button>
                         ))}
@@ -680,23 +686,23 @@ const BusinessDashboardContent = () => {
                     </div>
 
                     {/* Price Summary */}
-                    <div className="bg-muted/30 rounded-xl p-6">
-                      <h4 className="font-semibold text-foreground mb-4">Price Summary</h4>
+                    <div className="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                      <h4 className="font-bold text-slate-900 mb-4">Price Summary</h4>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">Base Price:</span>
-                          <span className="font-semibold text-foreground">
+                          <span className="text-slate-500">Base Price:</span>
+                          <span className="font-semibold text-slate-900">
                             ${selectedPosition === 'top' ? '500' : selectedPosition === 'mid' ? '350' : '250'}
                           </span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">Duration:</span>
-                          <span className="font-semibold text-foreground">
+                          <span className="text-slate-500">Duration:</span>
+                          <span className="font-semibold text-slate-900">
                             {selectedDuration === 'monthly' ? '1 month' : selectedDuration === 'six_months' ? '6 months' : '12 months'}
                           </span>
                         </div>
                         {(selectedDuration === 'six_months' || selectedDuration === 'annual') && (
-                          <div className="flex justify-between text-success">
+                          <div className="flex justify-between text-emerald-600">
                             <span>Discount (5%):</span>
                             <span className="font-semibold">-${(
                               (selectedPosition === 'top' ? 500 : selectedPosition === 'mid' ? 350 : 250) *
@@ -704,9 +710,9 @@ const BusinessDashboardContent = () => {
                             ).toFixed(2)}</span>
                           </div>
                         )}
-                        <div className="border-t border-border pt-2 mt-2 flex justify-between">
-                          <span className="font-bold text-foreground">Total:</span>
-                          <span className="font-bold text-primary text-lg">
+                        <div className="border-t border-slate-200 pt-3 mt-3 flex justify-between items-center">
+                          <span className="font-bold text-slate-900 text-lg">Total:</span>
+                          <span className="font-bold text-[#1C4D8D] text-2xl">
                             ${(
                               (selectedPosition === 'top' ? 500 : selectedPosition === 'mid' ? 350 : 250) *
                               (selectedDuration === 'monthly' ? 1 : selectedDuration === 'six_months' ? 6 : 12) *
@@ -725,19 +731,19 @@ const BusinessDashboardContent = () => {
                         }
                         setPaymentStep('payment');
                       }}
-                      className="w-full py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all"
+                      className="w-full py-4 bg-[#1C4D8D] text-white rounded-xl font-bold text-lg hover:bg-[#1C4D8D]/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                     >
                       Continue to Payment
                     </button>
                   </div>
                 ) : (
                   <div className="space-y-6">
-                    <div className="bg-muted/30 rounded-xl p-6">
-                      <h4 className="font-semibold text-foreground mb-2">Order Summary</h4>
-                      <p className="text-sm text-muted-foreground mb-4">{bannerTitle}</p>
+                    <div className="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                      <h4 className="font-bold text-slate-900 mb-2">Order Summary</h4>
+                      <p className="text-sm text-slate-600 mb-4">{bannerTitle}</p>
                       <div className="flex justify-between items-center">
-                        <span className="text-muted-foreground">Total Amount:</span>
-                        <span className="text-2xl font-bold text-primary">
+                        <span className="text-slate-500">Total Amount:</span>
+                        <span className="text-2xl font-bold text-[#1C4D8D]">
                           ${(
                             (selectedPosition === 'top' ? 500 : selectedPosition === 'mid' ? 350 : 250) *
                             (selectedDuration === 'monthly' ? 1 : selectedDuration === 'six_months' ? 6 : 12) *
@@ -774,7 +780,7 @@ const BusinessDashboardContent = () => {
 
                     <button
                       onClick={() => setPaymentStep('details')}
-                      className="w-full py-3 border-2 border-border text-foreground rounded-lg font-semibold hover:bg-muted transition-all"
+                      className="w-full py-3 border-2 border-slate-200 text-slate-600 rounded-xl font-semibold hover:border-[#1C4D8D] hover:text-[#1C4D8D] transition-all"
                     >
                       Back to Details
                     </button>

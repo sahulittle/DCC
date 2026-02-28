@@ -31,7 +31,7 @@ const PricingContent = () => {
       id: 'plan_business',
       name: 'Business',
       description: 'Annual membership per employee',
-      annualPrice: 99.99,
+      annualPrice: 'EDT',
       priceNote: 'Starting at',
       features: [
         'All Individual features',
@@ -50,7 +50,7 @@ const PricingContent = () => {
       id: 'plan_association',
       name: 'Association',
       description: 'Annual membership per member',
-      annualPrice: 89.99,
+      annualPrice: 'EDT',
       priceNote: 'Starting at',
       features: [
         'All Individual features',

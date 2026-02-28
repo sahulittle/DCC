@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Icon from '../../components/ui/AppIcon';
 
 const LoginContent = () => {
+     const navigate = useNavigate();
      const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -17,6 +18,7 @@ const LoginContent = () => {
       business: { email: 'business@example.com', password: 'business123' },
       employer: { email: 'employer@example.com', password: 'employer123' },
       association: { email: 'association@example.com', password: 'association123' },
+      b2b: { email: 'b2b@example.com', password: 'b2b123' },
       admin: { email: 'admin@example.com', password: 'admin123' },
     };
 
@@ -26,13 +28,14 @@ const LoginContent = () => {
 
     if (isValid) {
       // Redirect based on user type
-      if (email === validCredentials.member.email) window.location.href = '/member-dashboard';
-      else if (email === validCredentials.business.email) window.location.href = '/business-dashboard';
-      else if (email === validCredentials.employer.email) window.location.href = '/employer-dashboard';
-      else if (email === validCredentials.association.email) window.location.href = '/association-dashboard';
-      else if (email === validCredentials.admin.email) window.location.href = '/admin-dashboard';
+      if (email === validCredentials.member.email) navigate('/member-dashboard');
+      else if (email === validCredentials.business.email) navigate('/business-dashboard');
+      else if (email === validCredentials.employer.email) navigate('/employer-dashboard');
+      else if (email === validCredentials.association.email) navigate('/association-dashboard');
+      else if (email === validCredentials.b2b.email) navigate('/b2b-dashboard');
+      else if (email === validCredentials.admin.email) navigate('/admin-dashboard');
     } else {
-      setError('Invalid email or password. Try: member@example.com / member123');
+      setError('Invalid email or password');
     }
   };
 
@@ -172,6 +175,7 @@ const LoginContent = () => {
             <div className="flex justify-between"><span>Business:</span> <span className="text-slate-800">business@example.com / business123</span></div>
             <div className="flex justify-between"><span>Employer:</span> <span className="text-slate-800">employer@example.com / employer123</span></div>
             <div className="flex justify-between"><span>Association:</span> <span className="text-slate-800">association@example.com / association123</span></div>
+            <div className="flex justify-between"><span>B2B:</span> <span className="text-slate-800">b2b@example.com / b2b123</span></div>
             <div className="flex justify-between"><span>Admin:</span> <span className="text-slate-800">admin@example.com / admin123</span></div>
           </div>
         </div>

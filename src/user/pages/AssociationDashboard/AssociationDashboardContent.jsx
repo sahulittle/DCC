@@ -5,9 +5,8 @@ import AppImage from '../../components/ui/AppImage';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const AssociationDashboardContent = () => {
-    const user = { id: 'mock-association-id' };
-    const [activeSection, setActiveSection] = useState('home');
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [user] = useState({ id: 'mock-association-id', email: 'association@example.com' });
+    const [activeTab, setActiveTab] = useState('directory');
 
     const [homeStats, setHomeStats] = useState({ totalCompanies: 0, activeEmployees: 0, totalRevenue: 0, totalCost: 0, totalProfit: 0, upcomingRenewals: 0 });
     const [revenueChartData, setRevenueChartData] = useState([]);
@@ -41,17 +40,17 @@ const AssociationDashboardContent = () => {
 
     useEffect(() => {
         if (!user) return;
-    }, [user, activeSection, showCompanyAnalytics, selectedAnalyticsCompany]);
+    }, [user, activeTab, showCompanyAnalytics, selectedAnalyticsCompany]);
 
     useEffect(() => {
         if (user) {
-            if (activeSection === 'home') fetchHomeData();
-            else if (activeSection === 'companies') fetchCompanies();
-            else if (activeSection === 'revenue') fetchRevenueSummary();
-            else if (activeSection === 'analytics') fetchAnalyticsData();
-            else if (activeSection === 'renewals') fetchRenewalData();
+            if (activeTab === 'home') fetchHomeData();
+            else if (activeTab === 'companies') fetchCompanies();
+            else if (activeTab === 'revenue') fetchRevenueSummary();
+            else if (activeTab === 'analytics') fetchAnalyticsData();
+            else if (activeTab === 'renewals') fetchRenewalData();
         }
-    }, [user, activeSection, dateFilter, revenueFilter, renewalFilter]);
+    }, [user, activeTab, dateFilter, revenueFilter, renewalFilter]);
 
     const fetchHomeData = async () => {
         setLoading(true);
@@ -218,57 +217,60 @@ const AssociationDashboardContent = () => {
         return 'Expired';
     };
 
-    const sidebarItems = [
-        { key: 'home', label: 'Home', icon: 'HomeIcon' },
-        { key: 'companies', label: 'Companies', icon: 'BuildingOfficeIcon' },
-        { key: 'revenue', label: 'Revenue Summary', icon: 'CurrencyDollarIcon' },
-        { key: 'analytics', label: 'Analytics', icon: 'ChartBarIcon' },
-        { key: 'renewals', label: 'Renewal Tracking', icon: 'ClockIcon' },
-    ];
-
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
-            <Toaster position="top-right" />
-
-            <div className="bg-white border-b border-border fixed top-0 left-0 right-0 z-50">
-                <div className="flex items-center justify-between px-6 py-4">
-                    <div className="flex items-center gap-4">
-                        <button onClick={() => setSidebarOpen(!sidebarOpen)} className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"><Icon name="Bars3Icon" size={24} /></button>
-                        <AppImage src="/assets/images/DCC_Logo-1770984608226.png" alt="Discount Club Cayman" className="h-12 w-auto" />
-                    </div>
-                    <div className="text-right">
-                        <p className="text-sm text-muted-foreground">Association</p>
-                        <p className="font-semibold text-foreground">Cayman Islands Chamber</p>
-                    </div>
-                </div>
+        <div className="min-h-screen bg-slate-50/50">
+            {/* Decorative background elements */}
+            <div className="fixed inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute top-0 right-0 w-125 h-125 bg-blue-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-125 h-125 bg-green-100/40 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
             </div>
 
-            <div className="flex pt-20">
-                <div className={`fixed left-0 top-20 bottom-0 w-64 bg-white border-r border-border transition-transform duration-300 z-40 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
-                    <nav className="p-4 space-y-2">
-                        {sidebarItems.map(item => (
-                            <button key={item.key} onClick={() => setActiveSection(item.key)} className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${activeSection === item.key ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-gray-100'}`}>
-                                <Icon name={item.icon} size={20} /><span className="font-medium">{item.label}</span>
-                            </button>
-                        ))}
-                        <button onClick={handleExportMembers} className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-foreground hover:bg-gray-100 transition-colors">
-                            <Icon name="ArrowDownTrayIcon" size={20} /><span className="font-medium">Export Members (CSV)</span>
-                        </button>
-                        <button onClick={() => setActiveSection('profile')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${activeSection === 'profile' ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-gray-100'}`}>
-                            <Icon name="UserCircleIcon" size={20} /><span className="font-medium">Company Profile</span>
-                        </button>
-                        <button onClick={() => window.location.href = '/login'} className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition-colors">
-                            <Icon name="ArrowRightOnRectangleIcon" size={20} /><span className="font-medium">Logout</span>
-                        </button>
-                    </nav>
+            <Toaster position="top-right" />
+
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                {/* Header */}
+                <div className="mb-10">
+                    <h1 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 mb-2">Association Dashboard</h1>
+                    <p className="text-lg text-slate-600">Manage your association members and revenue</p>
                 </div>
 
-                <div className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'lg:ml-64' : 'ml-0'}`}>
-                    <div className="p-6">
+                <div className="bg-white rounded-2xl border border-slate-100 shadow-sm mb-10 overflow-hidden">
+                    <div className="border-b border-slate-100 px-6">
+                        <div className="flex gap-8 overflow-x-auto scrollbar-hide">
+                            {[
+                                { key: 'home', label: 'Overview', icon: 'HomeIcon' },
+                                { key: 'companies', label: 'Companies', icon: 'BuildingOfficeIcon' },
+                                { key: 'revenue', label: 'Revenue', icon: 'CurrencyDollarIcon' },
+                                { key: 'analytics', label: 'Analytics', icon: 'ChartBarIcon' },
+                                { key: 'renewals', label: 'Renewals', icon: 'ClockIcon' },
+                                { key: 'profile', label: 'Profile', icon: 'UserCircleIcon' },
+                            ].map((tab) => (
+                                <button
+                                    key={tab.key}
+                                    onClick={() => setActiveTab(tab.key)}
+                                    className={`py-4 border-b-2 font-semibold transition-colors whitespace-nowrap flex items-center gap-2 ${
+                                        activeTab === tab.key
+                                            ? 'border-[#1C4D8D] text-[#1C4D8D]'
+                                            : 'border-transparent text-slate-500 hover:text-slate-900'
+                                    }`}
+                                >
+                                    <Icon name={tab.icon} size={20} />
+                                    {tab.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
 
-                        {activeSection === 'home' && (
+                    <div className="p-6">
+                        {activeTab === 'home' && (
                             <div className="space-y-6">
-                                <h1 className="text-3xl font-heading font-bold text-foreground">Overview</h1>
+                                <div className="flex items-center justify-between">
+                                    <h2 className="text-xl font-bold text-slate-900">Dashboard Overview</h2>
+                                    <button onClick={handleExportMembers} className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors flex items-center gap-2 font-medium">
+                                        <Icon name="ArrowDownTrayIcon" size={18} /> Export Members
+                                    </button>
+                                </div>
+                                
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {[
                                         { icon: 'BuildingOfficeIcon', color: 'bg-blue-500', value: homeStats.totalCompanies, label: 'Total Companies' },
@@ -278,21 +280,21 @@ const AssociationDashboardContent = () => {
                                         { icon: 'ArrowTrendingUpIcon', color: 'bg-green-600', value: `$${homeStats.totalProfit.toFixed(2)}`, label: 'Total Profit' },
                                         { icon: 'ClockIcon', color: 'bg-red-500', value: homeStats.upcomingRenewals, label: 'Upcoming Renewals (30 Days)' },
                                     ].map((card, i) => (
-                                        <div key={i} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
+                                        <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-all">
                                             <div className="flex items-center gap-4">
-                                                <div className={`w-12 h-12 ${card.color} rounded-xl flex items-center justify-center`}><Icon name={card.icon} size={24} className="text-white" /></div>
-                                                <div><p className="text-2xl font-bold text-foreground">{card.value}</p><p className="text-sm text-muted-foreground">{card.label}</p></div>
+                                                <div className={`w-12 h-12 ${card.color} rounded-xl flex items-center justify-center shadow-lg shadow-black/5`}><Icon name={card.icon} size={24} className="text-white" /></div>
+                                                <div><p className="text-2xl font-bold text-slate-900">{card.value}</p><p className="text-sm text-slate-500">{card.label}</p></div>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
 
-                                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
                                     <div className="flex items-center justify-between mb-6">
-                                        <h2 className="text-xl font-bold text-foreground">Revenue vs Cost vs Profit</h2>
+                                        <h2 className="text-lg font-bold text-slate-900">Revenue vs Cost vs Profit</h2>
                                         <div className="flex gap-2">
                                             {['month', 'quarter', 'year', 'custom'].map(f => (
-                                                <button key={f} onClick={() => setDateFilter(f)} className={`px-4 py-2 rounded-lg transition-colors ${dateFilter === f ? 'bg-primary text-primary-foreground' : 'bg-gray-100 text-foreground hover:bg-gray-200'}`}>
+                                                <button key={f} onClick={() => setDateFilter(f)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${dateFilter === f ? 'bg-[#1C4D8D] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}>
                                                     {f.charAt(0).toUpperCase() + f.slice(1)}
                                                 </button>
                                             ))}
@@ -300,8 +302,8 @@ const AssociationDashboardContent = () => {
                                     </div>
                                     {dateFilter === 'custom' && (
                                         <div className="flex gap-4 mb-6">
-                                            <input type="date" value={customStartDate} onChange={(e) => setCustomStartDate(e.target.value)} className="px-4 py-2 border border-border rounded-lg" />
-                                            <input type="date" value={customEndDate} onChange={(e) => setCustomEndDate(e.target.value)} className="px-4 py-2 border border-border rounded-lg" />
+                                            <input type="date" value={customStartDate} onChange={(e) => setCustomStartDate(e.target.value)} className="px-4 py-2 border border-slate-200 rounded-lg" />
+                                            <input type="date" value={customEndDate} onChange={(e) => setCustomEndDate(e.target.value)} className="px-4 py-2 border border-slate-200 rounded-lg" />
                                         </div>
                                     )}
                                     <ResponsiveContainer width="100%" height={400}>
@@ -320,34 +322,34 @@ const AssociationDashboardContent = () => {
                             </div>
                         )}
 
-                        {activeSection === 'companies' && (
+                        {activeTab === 'companies' && (
                             <div className="space-y-6">
-                                <h1 className="text-3xl font-heading font-bold text-foreground">Companies</h1>
-                                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
+                                <h2 className="text-xl font-bold text-slate-900">Registered Companies</h2>
+                                <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
                                     <div className="overflow-x-auto">
                                         <table className="w-full">
-                                            <thead>
-                                                <tr className="border-b border-border">
+                                            <thead className="bg-slate-50">
+                                                <tr className="border-b border-slate-200">
                                                     {[{ f: 'company_name', l: 'Company Name' }, { f: 'contact_name', l: 'Contact Name' }, { f: null, l: 'Email' }, { f: null, l: 'Phone' }, { f: 'qty_employees', l: 'Qty Employees' }, { f: 'status', l: 'Status' }, { f: 'renewal_date', l: 'Renewal Date' }, { f: null, l: 'Actions' }].map((col, i) => (
-                                                        <th key={i} className={`text-left py-3 px-4 font-semibold text-foreground ${col.f ? 'cursor-pointer hover:bg-gray-50' : ''}`} onClick={() => col.f && handleSort(col.f)}>
+                                                        <th key={i} className={`text-left py-4 px-6 text-sm font-bold text-slate-600 ${col.f ? 'cursor-pointer hover:bg-slate-100' : ''}`} onClick={() => col.f && handleSort(col.f)}>
                                                             {col.l} {col.f && sortField === col.f && (sortDirection === 'asc' ? '↑' : '↓')}
                                                         </th>
                                                     ))}
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                {loading ? <tr><td colSpan={8} className="text-center py-8 text-muted-foreground">Loading...</td></tr>
-                                                    : companies.length === 0 ? <tr><td colSpan={8} className="text-center py-8 text-muted-foreground">No companies found</td></tr>
+                                            <tbody className="divide-y divide-slate-100">
+                                                {loading ? <tr><td colSpan={8} className="text-center py-8 text-slate-500">Loading...</td></tr>
+                                                    : companies.length === 0 ? <tr><td colSpan={8} className="text-center py-8 text-slate-500">No companies found</td></tr>
                                                         : companies.map((company) => (
-                                                            <tr key={company.id} className="border-b border-border hover:bg-gray-50">
-                                                                <td className="py-3 px-4"><button onClick={() => handleViewEmployees(company)} className="text-primary hover:underline font-medium">{company.company_name}</button></td>
-                                                                <td className="py-3 px-4 text-foreground">{company.contact_name}</td>
-                                                                <td className="py-3 px-4 text-foreground">{company.contact_email}</td>
-                                                                <td className="py-3 px-4 text-foreground">{company.contact_phone}</td>
-                                                                <td className="py-3 px-4 text-foreground">{company.qty_employees}</td>
-                                                                <td className="py-3 px-4"><span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(company.status)}`}>{getStatusLabel(company.status)}</span></td>
-                                                                <td className="py-3 px-4 text-foreground">{company.renewal_date ? new Date(company.renewal_date).toLocaleDateString() : 'N/A'}</td>
-                                                                <td className="py-3 px-4"><button onClick={() => handleViewEmployees(company)} className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">View Employees</button></td>
+                                                            <tr key={company.id} className="hover:bg-slate-50/80 transition-colors">
+                                                                <td className="py-4 px-6"><button onClick={() => handleViewEmployees(company)} className="text-[#1C4D8D] hover:underline font-bold">{company.company_name}</button></td>
+                                                                <td className="py-4 px-6 text-slate-600">{company.contact_name}</td>
+                                                                <td className="py-4 px-6 text-slate-600">{company.contact_email}</td>
+                                                                <td className="py-4 px-6 text-slate-600">{company.contact_phone}</td>
+                                                                <td className="py-4 px-6 text-slate-600">{company.qty_employees}</td>
+                                                                <td className="py-4 px-6"><span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(company.status)}`}>{getStatusLabel(company.status)}</span></td>
+                                                                <td className="py-4 px-6 text-slate-600">{company.renewal_date ? new Date(company.renewal_date).toLocaleDateString() : 'N/A'}</td>
+                                                                <td className="py-4 px-6"><button onClick={() => handleViewEmployees(company)} className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors text-sm font-medium">View Employees</button></td>
                                                             </tr>
                                                         ))}
                                             </tbody>
@@ -357,9 +359,9 @@ const AssociationDashboardContent = () => {
                             </div>
                         )}
 
-                        {activeSection === 'revenue' && (
+                        {activeTab === 'revenue' && (
                             <div className="space-y-6">
-                                <h1 className="text-3xl font-heading font-bold text-foreground">Revenue Summary (P&L)</h1>
+                                <h2 className="text-xl font-bold text-slate-900">Revenue Summary (P&L)</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                     {[
                                         { label: 'Total Revenue', value: `$${revenueSummary.totalRevenue.toFixed(2)}`, color: '' },
@@ -367,37 +369,37 @@ const AssociationDashboardContent = () => {
                                         { label: 'Total Profit', value: `$${revenueSummary.totalProfit.toFixed(2)}`, color: 'text-green-600' },
                                         { label: 'Profit Margin %', value: `${revenueSummary.profitMargin.toFixed(1)}%`, color: '' },
                                     ].map((card, i) => (
-                                        <div key={i} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
-                                            <p className="text-sm text-muted-foreground mb-2">{card.label}</p>
-                                            <p className={`text-3xl font-bold ${card.color || 'text-foreground'}`}>{card.value}</p>
+                                        <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                            <p className="text-sm text-slate-500 mb-2">{card.label}</p>
+                                            <p className={`text-3xl font-bold ${card.color || 'text-slate-900'}`}>{card.value}</p>
                                         </div>
                                     ))}
                                 </div>
                                 <div className="flex gap-2">
                                     {['month', 'quarter', 'year', 'custom'].map(f => (
-                                        <button key={f} onClick={() => setRevenueFilter(f)} className={`px-4 py-2 rounded-lg transition-colors ${revenueFilter === f ? 'bg-primary text-primary-foreground' : 'bg-white border border-border text-foreground hover:bg-gray-50'}`}>
+                                        <button key={f} onClick={() => setRevenueFilter(f)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${revenueFilter === f ? 'bg-[#1C4D8D] text-white' : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
                                             {f === 'month' ? 'This Month' : f === 'quarter' ? 'This Quarter' : f === 'year' ? 'This Year' : 'Custom Range'}
                                         </button>
                                     ))}
                                 </div>
-                                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
                                     <div className="flex items-center justify-between mb-6">
-                                        <h2 className="text-xl font-bold text-foreground">Breakdown by Company</h2>
-                                        <button onClick={exportRevenueToPDF} className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">Export to PDF</button>
+                                        <h2 className="text-lg font-bold text-slate-900">Breakdown by Company</h2>
+                                        <button onClick={exportRevenueToPDF} className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors text-sm font-medium">Export to PDF</button>
                                     </div>
                                     <div className="overflow-x-auto">
                                         <table className="w-full">
-                                            <thead><tr className="border-b border-border">{['Company Name', 'Qty Employees', 'Revenue', 'Cost', 'Profit'].map(h => <th key={h} className="text-left py-3 px-4 font-semibold text-foreground">{h}</th>)}</tr></thead>
-                                            <tbody>
-                                                {loading ? <tr><td colSpan={5} className="text-center py-8 text-muted-foreground">Loading...</td></tr>
-                                                    : revenueBreakdown.length === 0 ? <tr><td colSpan={5} className="text-center py-8 text-muted-foreground">No data available</td></tr>
+                                            <thead><tr className="border-b border-slate-200">{['Company Name', 'Qty Employees', 'Revenue', 'Cost', 'Profit'].map(h => <th key={h} className="text-left py-3 px-4 font-bold text-slate-600 text-sm">{h}</th>)}</tr></thead>
+                                            <tbody className="divide-y divide-slate-100">
+                                                {loading ? <tr><td colSpan={5} className="text-center py-8 text-slate-500">Loading...</td></tr>
+                                                    : revenueBreakdown.length === 0 ? <tr><td colSpan={5} className="text-center py-8 text-slate-500">No data available</td></tr>
                                                         : revenueBreakdown.map(company => (
-                                                            <tr key={company.id} className="border-b border-border hover:bg-gray-50">
-                                                                <td className="py-3 px-4 text-foreground font-medium">{company.company_name}</td>
-                                                                <td className="py-3 px-4 text-foreground">{company.qty_employees}</td>
-                                                                <td className="py-3 px-4 text-foreground">${parseFloat(company.revenue || 0).toFixed(2)}</td>
-                                                                <td className="py-3 px-4 text-foreground">${parseFloat(company.cost || 0).toFixed(2)}</td>
-                                                                <td className="py-3 px-4 text-green-600 font-semibold">${parseFloat(company.profit || 0).toFixed(2)}</td>
+                                                            <tr key={company.id} className="hover:bg-slate-50">
+                                                                <td className="py-3 px-4 text-slate-900 font-medium">{company.company_name}</td>
+                                                                <td className="py-3 px-4 text-slate-600">{company.qty_employees}</td>
+                                                                <td className="py-3 px-4 text-slate-600">${parseFloat(company.revenue || 0).toFixed(2)}</td>
+                                                                <td className="py-3 px-4 text-slate-600">${parseFloat(company.cost || 0).toFixed(2)}</td>
+                                                                <td className="py-3 px-4 text-emerald-600 font-bold">${parseFloat(company.profit || 0).toFixed(2)}</td>
                                                             </tr>
                                                         ))}
                                             </tbody>
@@ -407,32 +409,32 @@ const AssociationDashboardContent = () => {
                             </div>
                         )}
 
-                        {activeSection === 'analytics' && !showCompanyAnalytics && (
+                        {activeTab === 'analytics' && !showCompanyAnalytics && (
                             <div className="space-y-6">
-                                <h1 className="text-3xl font-heading font-bold text-foreground">Analytics (Usage + Savings + ROI)</h1>
+                                <h2 className="text-xl font-bold text-slate-900">Analytics (Usage + Savings + ROI)</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border"><p className="text-sm text-muted-foreground mb-2">Total Active Employees</p><p className="text-3xl font-bold text-foreground">{analyticsOverview.activeEmployees}</p></div>
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border"><p className="text-sm text-muted-foreground mb-2">Total Cost</p><p className="text-3xl font-bold text-foreground">${analyticsOverview.totalCost.toFixed(2)}</p></div>
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border"><p className="text-sm text-muted-foreground mb-2">Total Savings</p><p className="text-3xl font-bold text-foreground">${analyticsOverview.totalSavings.toFixed(2)}</p></div>
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border col-span-1 md:col-span-2 lg:col-span-1"><p className="text-sm text-muted-foreground mb-2">Return Multiple</p><p className={`text-4xl font-bold ${getReturnMultipleColor(analyticsOverview.returnMultiple)}`}>{analyticsOverview.totalCost > 0 ? `${analyticsOverview.returnMultiple.toFixed(1)}× Return` : 'N/A'}</p></div>
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border"><p className="text-sm text-muted-foreground mb-2">Association Profit</p><p className="text-3xl font-bold text-green-600">${analyticsOverview.associationProfit.toFixed(2)}</p></div>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"><p className="text-sm text-slate-500 mb-2">Total Active Employees</p><p className="text-3xl font-bold text-slate-900">{analyticsOverview.activeEmployees}</p></div>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"><p className="text-sm text-slate-500 mb-2">Total Cost</p><p className="text-3xl font-bold text-slate-900">${analyticsOverview.totalCost.toFixed(2)}</p></div>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"><p className="text-sm text-slate-500 mb-2">Total Savings</p><p className="text-3xl font-bold text-slate-900">${analyticsOverview.totalSavings.toFixed(2)}</p></div>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 col-span-1 md:col-span-2 lg:col-span-1"><p className="text-sm text-slate-500 mb-2">Return Multiple</p><p className={`text-4xl font-bold ${getReturnMultipleColor(analyticsOverview.returnMultiple)}`}>{analyticsOverview.totalCost > 0 ? `${analyticsOverview.returnMultiple.toFixed(1)}× Return` : 'N/A'}</p></div>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"><p className="text-sm text-slate-500 mb-2">Association Profit</p><p className="text-3xl font-bold text-emerald-600">${analyticsOverview.associationProfit.toFixed(2)}</p></div>
                                 </div>
-                                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
-                                    <h2 className="text-xl font-bold text-foreground mb-6">Company Analytics</h2>
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                    <h2 className="text-lg font-bold text-slate-900 mb-6">Company Analytics</h2>
                                     <div className="overflow-x-auto">
                                         <table className="w-full">
-                                            <thead><tr className="border-b border-border">{['Company Name', 'Qty', 'Cost', 'Savings', 'Return', 'Actions'].map(h => <th key={h} className="text-left py-3 px-4 font-semibold text-foreground">{h}</th>)}</tr></thead>
-                                            <tbody>
-                                                {loading ? <tr><td colSpan={6} className="text-center py-8 text-muted-foreground">Loading...</td></tr>
-                                                    : analyticsCompanies.length === 0 ? <tr><td colSpan={6} className="text-center py-8 text-muted-foreground">No data available</td></tr>
+                                            <thead><tr className="border-b border-slate-200">{['Company Name', 'Qty', 'Cost', 'Savings', 'Return', 'Actions'].map(h => <th key={h} className="text-left py-3 px-4 font-bold text-slate-600 text-sm">{h}</th>)}</tr></thead>
+                                            <tbody className="divide-y divide-slate-100">
+                                                {loading ? <tr><td colSpan={6} className="text-center py-8 text-slate-500">Loading...</td></tr>
+                                                    : analyticsCompanies.length === 0 ? <tr><td colSpan={6} className="text-center py-8 text-slate-500">No data available</td></tr>
                                                         : analyticsCompanies.map(company => (
-                                                            <tr key={company.id} className="border-b border-border hover:bg-gray-50">
-                                                                <td className="py-3 px-4"><button onClick={() => handleViewCompanyAnalytics(company)} className="text-primary hover:underline font-medium">{company.company_name}</button></td>
-                                                                <td className="py-3 px-4 text-foreground">{company.qty_employees}</td>
-                                                                <td className="py-3 px-4 text-foreground">${parseFloat(company.total_cost || 0).toFixed(2)}</td>
-                                                                <td className="py-3 px-4 text-foreground">${parseFloat(company.total_savings || 0).toFixed(2)}</td>
+                                                            <tr key={company.id} className="hover:bg-slate-50">
+                                                                <td className="py-3 px-4"><button onClick={() => handleViewCompanyAnalytics(company)} className="text-[#1C4D8D] hover:underline font-medium">{company.company_name}</button></td>
+                                                                <td className="py-3 px-4 text-slate-600">{company.qty_employees}</td>
+                                                                <td className="py-3 px-4 text-slate-600">${parseFloat(company.total_cost || 0).toFixed(2)}</td>
+                                                                <td className="py-3 px-4 text-slate-600">${parseFloat(company.total_savings || 0).toFixed(2)}</td>
                                                                 <td className="py-3 px-4"><span className={`font-bold ${getReturnMultipleColor(company.return_multiple)}`}>{company.return_multiple > 0 ? `${company.return_multiple.toFixed(1)}×` : 'N/A'}</span></td>
-                                                                <td className="py-3 px-4"><button onClick={() => handleViewCompanyAnalytics(company)} className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">View Details</button></td>
+                                                                <td className="py-3 px-4"><button onClick={() => handleViewCompanyAnalytics(company)} className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors text-sm">View Details</button></td>
                                                             </tr>
                                                         ))}
                                             </tbody>
@@ -442,32 +444,32 @@ const AssociationDashboardContent = () => {
                             </div>
                         )}
 
-                        {activeSection === 'analytics' && showCompanyAnalytics && selectedAnalyticsCompany && (
+                        {activeTab === 'analytics' && showCompanyAnalytics && selectedAnalyticsCompany && (
                             <div className="space-y-6">
                                 <div className="flex items-center gap-4">
-                                    <button onClick={() => setShowCompanyAnalytics(false)} className="p-2 hover:bg-gray-100 rounded-lg"><Icon name="ArrowLeftIcon" size={24} /></button>
-                                    <h1 className="text-3xl font-heading font-bold text-foreground">{selectedAnalyticsCompany.company_name} Analytics</h1>
+                                    <button onClick={() => setShowCompanyAnalytics(false)} className="p-2 hover:bg-slate-100 rounded-lg"><Icon name="ArrowLeftIcon" size={24} /></button>
+                                    <h1 className="text-2xl font-bold text-slate-900">{selectedAnalyticsCompany.company_name} Analytics</h1>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border"><p className="text-sm text-muted-foreground mb-2">Total Cost</p><p className="text-3xl font-bold text-foreground">${parseFloat(selectedAnalyticsCompany.total_cost || 0).toFixed(2)}</p></div>
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border"><p className="text-sm text-muted-foreground mb-2">Total Savings</p><p className="text-3xl font-bold text-foreground">${parseFloat(selectedAnalyticsCompany.total_savings || 0).toFixed(2)}</p></div>
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border col-span-1 md:col-span-2"><p className="text-sm text-muted-foreground mb-2">Return Multiple</p><p className={`text-5xl font-bold ${getReturnMultipleColor(selectedAnalyticsCompany.return_multiple)}`}>{selectedAnalyticsCompany.return_multiple > 0 ? `${selectedAnalyticsCompany.return_multiple.toFixed(1)}× Return` : 'N/A'}</p></div>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"><p className="text-sm text-slate-500 mb-2">Total Cost</p><p className="text-3xl font-bold text-slate-900">${parseFloat(selectedAnalyticsCompany.total_cost || 0).toFixed(2)}</p></div>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"><p className="text-sm text-slate-500 mb-2">Total Savings</p><p className="text-3xl font-bold text-slate-900">${parseFloat(selectedAnalyticsCompany.total_savings || 0).toFixed(2)}</p></div>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 col-span-1 md:col-span-2"><p className="text-sm text-slate-500 mb-2">Return Multiple</p><p className={`text-5xl font-bold ${getReturnMultipleColor(selectedAnalyticsCompany.return_multiple)}`}>{selectedAnalyticsCompany.return_multiple > 0 ? `${selectedAnalyticsCompany.return_multiple.toFixed(1)}× Return` : 'N/A'}</p></div>
                                 </div>
                                 {savingsBreakdown && (
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
-                                        <h2 className="text-xl font-bold text-foreground mb-6">Savings Breakdown by Channel</h2>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                        <h2 className="text-lg font-bold text-slate-900 mb-6">Savings Breakdown by Channel</h2>
                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                             {[
                                                 { label: 'Travel Savings', value: savingsBreakdown.travel, bg: 'bg-blue-50' },
-                                                { label: 'Discount Savings', value: savingsBreakdown.discount, bg: 'bg-green-50' },
+                                                { label: 'Discount Savings', value: savingsBreakdown.discount, bg: 'bg-emerald-50' },
                                                 { label: 'Certificate Redemptions', value: savingsBreakdown.certificate, bg: 'bg-purple-50' },
                                             ].map((ch, i) => {
                                                 const total = savingsBreakdown.travel + savingsBreakdown.discount + savingsBreakdown.certificate;
                                                 return (
                                                     <div key={i} className={`p-4 ${ch.bg} rounded-xl`}>
-                                                        <p className="text-sm text-muted-foreground mb-2">{ch.label}</p>
-                                                        <p className="text-2xl font-bold text-foreground">${ch.value.toFixed(2)}</p>
-                                                        <p className="text-sm text-muted-foreground mt-2">{total > 0 ? ((ch.value / total) * 100).toFixed(1) : 0}% of total</p>
+                                                        <p className="text-sm text-slate-500 mb-2">{ch.label}</p>
+                                                        <p className="text-2xl font-bold text-slate-900">${ch.value.toFixed(2)}</p>
+                                                        <p className="text-sm text-slate-500 mt-2">{total > 0 ? ((ch.value / total) * 100).toFixed(1) : 0}% of total</p>
                                                     </div>
                                                 );
                                             })}
@@ -475,17 +477,17 @@ const AssociationDashboardContent = () => {
                                     </div>
                                 )}
                                 {discountsByCategory.length > 0 && (
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
-                                        <h2 className="text-xl font-bold text-foreground mb-6">Discounts - Savings by Category</h2>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                        <h2 className="text-lg font-bold text-slate-900 mb-6">Discounts - Savings by Category</h2>
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
-                                                <thead><tr className="border-b border-border">{['Category', 'Total Savings', 'Redemption Count', 'Avg Savings per Redemption'].map(h => <th key={h} className="text-left py-3 px-4 font-semibold text-foreground">{h}</th>)}</tr></thead>
-                                                <tbody>{discountsByCategory.map((cat, i) => (
-                                                    <tr key={i} className="border-b border-border hover:bg-gray-50">
-                                                        <td className="py-3 px-4 text-foreground font-medium">{cat.category}</td>
-                                                        <td className="py-3 px-4 text-foreground">${parseFloat(cat.total_savings || 0).toFixed(2)}</td>
-                                                        <td className="py-3 px-4 text-foreground">{cat.redemption_count}</td>
-                                                        <td className="py-3 px-4 text-foreground">${parseFloat(cat.avg_savings_per_redemption || 0).toFixed(2)}</td>
+                                                <thead><tr className="border-b border-slate-200">{['Category', 'Total Savings', 'Redemption Count', 'Avg Savings per Redemption'].map(h => <th key={h} className="text-left py-3 px-4 font-bold text-slate-600 text-sm">{h}</th>)}</tr></thead>
+                                                <tbody className="divide-y divide-slate-100">{discountsByCategory.map((cat, i) => (
+                                                    <tr key={i} className="hover:bg-slate-50">
+                                                        <td className="py-3 px-4 text-slate-900 font-medium">{cat.category}</td>
+                                                        <td className="py-3 px-4 text-slate-600">${parseFloat(cat.total_savings || 0).toFixed(2)}</td>
+                                                        <td className="py-3 px-4 text-slate-600">{cat.redemption_count}</td>
+                                                        <td className="py-3 px-4 text-slate-600">${parseFloat(cat.avg_savings_per_redemption || 0).toFixed(2)}</td>
                                                     </tr>
                                                 ))}</tbody>
                                             </table>
@@ -493,17 +495,17 @@ const AssociationDashboardContent = () => {
                                     </div>
                                 )}
                                 {certificateRedemptions.length > 0 && (
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
-                                        <h2 className="text-xl font-bold text-foreground mb-6">Certificate Redemptions by Category</h2>
+                                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                        <h2 className="text-lg font-bold text-slate-900 mb-6">Certificate Redemptions by Category</h2>
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
-                                                <thead><tr className="border-b border-border">{['Category', 'Redeemed Value', 'Redemption Count', 'Avg Value per Redemption'].map(h => <th key={h} className="text-left py-3 px-4 font-semibold text-foreground">{h}</th>)}</tr></thead>
-                                                <tbody>{certificateRedemptions.map((cert, i) => (
-                                                    <tr key={i} className="border-b border-border hover:bg-gray-50">
-                                                        <td className="py-3 px-4 text-foreground font-medium">{cert.category}</td>
-                                                        <td className="py-3 px-4 text-foreground">${parseFloat(cert.redeemed_value || 0).toFixed(2)}</td>
-                                                        <td className="py-3 px-4 text-foreground">{cert.redemption_count}</td>
-                                                        <td className="py-3 px-4 text-foreground">${parseFloat(cert.avg_value_per_redemption || 0).toFixed(2)}</td>
+                                                <thead><tr className="border-b border-slate-200">{['Category', 'Redeemed Value', 'Redemption Count', 'Avg Value per Redemption'].map(h => <th key={h} className="text-left py-3 px-4 font-bold text-slate-600 text-sm">{h}</th>)}</tr></thead>
+                                                <tbody className="divide-y divide-slate-100">{certificateRedemptions.map((cert, i) => (
+                                                    <tr key={i} className="hover:bg-slate-50">
+                                                        <td className="py-3 px-4 text-slate-900 font-medium">{cert.category}</td>
+                                                        <td className="py-3 px-4 text-slate-600">${parseFloat(cert.redeemed_value || 0).toFixed(2)}</td>
+                                                        <td className="py-3 px-4 text-slate-600">{cert.redemption_count}</td>
+                                                        <td className="py-3 px-4 text-slate-600">${parseFloat(cert.avg_value_per_redemption || 0).toFixed(2)}</td>
                                                     </tr>
                                                 ))}</tbody>
                                             </table>
@@ -513,31 +515,31 @@ const AssociationDashboardContent = () => {
                             </div>
                         )}
 
-                        {activeSection === 'renewals' && (
+                        {activeTab === 'renewals' && (
                             <div className="space-y-6">
-                                <h1 className="text-3xl font-heading font-bold text-foreground">Renewal Tracking</h1>
+                                <h2 className="text-xl font-bold text-slate-900">Renewal Tracking</h2>
                                 <div className="flex gap-2">
                                     {[{ k: '30', l: 'Expiring in 30 Days' }, { k: '60', l: 'Expiring in 60 Days' }, { k: 'expired', l: 'Expired' }].map(f => (
-                                        <button key={f.k} onClick={() => setRenewalFilter(f.k)} className={`px-4 py-2 rounded-lg transition-colors ${renewalFilter === f.k ? 'bg-primary text-primary-foreground' : 'bg-white border border-border text-foreground hover:bg-gray-50'}`}>{f.l}</button>
+                                        <button key={f.k} onClick={() => setRenewalFilter(f.k)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${renewalFilter === f.k ? 'bg-[#1C4D8D] text-white' : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'}`}>{f.l}</button>
                                     ))}
                                 </div>
-                                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
                                     <div className="overflow-x-auto">
                                         <table className="w-full">
-                                            <thead><tr className="border-b border-border">{['Company Name', 'Contact Name', 'Email', 'Phone', 'Qty Employees', 'Status', 'Renewal Date', 'Actions'].map(h => <th key={h} className="text-left py-3 px-4 font-semibold text-foreground">{h}</th>)}</tr></thead>
-                                            <tbody>
-                                                {loading ? <tr><td colSpan={8} className="text-center py-8 text-muted-foreground">Loading...</td></tr>
-                                                    : renewalCompanies.length === 0 ? <tr><td colSpan={8} className="text-center py-8 text-muted-foreground">No companies found</td></tr>
+                                            <thead><tr className="border-b border-slate-200">{['Company Name', 'Contact Name', 'Email', 'Phone', 'Qty Employees', 'Status', 'Renewal Date', 'Actions'].map(h => <th key={h} className="text-left py-3 px-4 font-bold text-slate-600 text-sm">{h}</th>)}</tr></thead>
+                                            <tbody className="divide-y divide-slate-100">
+                                                {loading ? <tr><td colSpan={8} className="text-center py-8 text-slate-500">Loading...</td></tr>
+                                                    : renewalCompanies.length === 0 ? <tr><td colSpan={8} className="text-center py-8 text-slate-500">No companies found</td></tr>
                                                         : renewalCompanies.map(company => (
-                                                            <tr key={company.id} className="border-b border-border hover:bg-gray-50">
-                                                                <td className="py-3 px-4 text-foreground font-medium">{company.company_name}</td>
-                                                                <td className="py-3 px-4 text-foreground">{company.contact_name}</td>
-                                                                <td className="py-3 px-4 text-foreground">{company.contact_email}</td>
-                                                                <td className="py-3 px-4 text-foreground">{company.contact_phone}</td>
-                                                                <td className="py-3 px-4 text-foreground">{company.qty_employees}</td>
-                                                                <td className="py-3 px-4"><span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(company.status)}`}>{getStatusLabel(company.status)}</span></td>
-                                                                <td className="py-3 px-4 text-foreground">{company.renewal_date ? new Date(company.renewal_date).toLocaleDateString() : 'N/A'}</td>
-                                                                <td className="py-3 px-4"><button onClick={() => handleSendReminder(company)} className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">Send Reminder</button></td>
+                                                            <tr key={company.id} className="hover:bg-slate-50">
+                                                                <td className="py-3 px-4 text-slate-900 font-medium">{company.company_name}</td>
+                                                                <td className="py-3 px-4 text-slate-600">{company.contact_name}</td>
+                                                                <td className="py-3 px-4 text-slate-600">{company.contact_email}</td>
+                                                                <td className="py-3 px-4 text-slate-600">{company.contact_phone}</td>
+                                                                <td className="py-3 px-4 text-slate-600">{company.qty_employees}</td>
+                                                                <td className="py-3 px-4"><span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(company.status)}`}>{getStatusLabel(company.status)}</span></td>
+                                                                <td className="py-3 px-4 text-slate-600">{company.renewal_date ? new Date(company.renewal_date).toLocaleDateString() : 'N/A'}</td>
+                                                                <td className="py-3 px-4"><button onClick={() => handleSendReminder(company)} className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors text-sm">Send Reminder</button></td>
                                                             </tr>
                                                         ))}
                                             </tbody>
@@ -547,11 +549,12 @@ const AssociationDashboardContent = () => {
                             </div>
                         )}
 
-                        {activeSection === 'profile' && (
+                        {activeTab === 'profile' && (
                             <div className="space-y-6">
-                                <h1 className="text-3xl font-heading font-bold text-foreground">Company Profile</h1>
-                                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-border">
-                                    <p className="text-center py-12 text-muted-foreground">Company profile management coming soon...</p>
+                                <h2 className="text-xl font-bold text-slate-900">Company Profile</h2>
+                                <div className="bg-white rounded-2xl p-12 border border-dashed border-slate-200 text-center">
+                                    <Icon name="UserCircleIcon" size={48} className="mx-auto text-slate-300 mb-4" />
+                                    <p className="text-slate-500">Company profile management coming soon...</p>
                                 </div>
                             </div>
                         )}
@@ -561,24 +564,24 @@ const AssociationDashboardContent = () => {
 
             {showEmployeeModal && selectedCompany && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-y-auto">
-                        <div className="p-6 border-b border-border flex items-center justify-between">
-                            <h2 className="text-2xl font-bold text-foreground">{selectedCompany.company_name} - Employees</h2>
-                            <button onClick={() => setShowEmployeeModal(false)} className="p-2 hover:bg-gray-100 rounded-lg"><Icon name="XMarkIcon" size={24} /></button>
+                    <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-y-auto shadow-2xl">
+                        <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                            <h2 className="text-xl font-bold text-slate-900">{selectedCompany.company_name} - Employees</h2>
+                            <button onClick={() => setShowEmployeeModal(false)} className="p-2 hover:bg-slate-100 rounded-full text-slate-500"><Icon name="XMarkIcon" size={24} /></button>
                         </div>
                         <div className="p-6">
                             <div className="overflow-x-auto">
                                 <table className="w-full">
-                                    <thead><tr className="border-b border-border">{['Employee Name', 'Email', 'Phone', 'Membership Status', 'Expiry Date'].map(h => <th key={h} className="text-left py-3 px-4 font-semibold text-foreground">{h}</th>)}</tr></thead>
-                                    <tbody>
-                                        {companyEmployees.length === 0 ? <tr><td colSpan={5} className="text-center py-8 text-muted-foreground">No employees found</td></tr>
+                                    <thead><tr className="border-b border-slate-200">{['Employee Name', 'Email', 'Phone', 'Membership Status', 'Expiry Date'].map(h => <th key={h} className="text-left py-3 px-4 font-bold text-slate-600 text-sm">{h}</th>)}</tr></thead>
+                                    <tbody className="divide-y divide-slate-100">
+                                        {companyEmployees.length === 0 ? <tr><td colSpan={5} className="text-center py-8 text-slate-500">No employees found</td></tr>
                                             : companyEmployees.map(employee => (
-                                                <tr key={employee.id} className="border-b border-border hover:bg-gray-50">
-                                                    <td className="py-3 px-4 text-foreground">{employee.employee_name}</td>
-                                                    <td className="py-3 px-4 text-foreground">{employee.email}</td>
-                                                    <td className="py-3 px-4 text-foreground">{employee.phone}</td>
-                                                    <td className="py-3 px-4"><span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(employee.membership_status)}`}>{getStatusLabel(employee.membership_status)}</span></td>
-                                                    <td className="py-3 px-4 text-foreground">{employee.expiry_date ? new Date(employee.expiry_date).toLocaleDateString() : 'N/A'}</td>
+                                                <tr key={employee.id} className="hover:bg-slate-50">
+                                                    <td className="py-3 px-4 text-slate-900">{employee.employee_name}</td>
+                                                    <td className="py-3 px-4 text-slate-600">{employee.email}</td>
+                                                    <td className="py-3 px-4 text-slate-600">{employee.phone}</td>
+                                                    <td className="py-3 px-4"><span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(employee.membership_status)}`}>{getStatusLabel(employee.membership_status)}</span></td>
+                                                    <td className="py-3 px-4 text-slate-600">{employee.expiry_date ? new Date(employee.expiry_date).toLocaleDateString() : 'N/A'}</td>
                                                 </tr>
                                             ))}
                                     </tbody>

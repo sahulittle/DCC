@@ -130,7 +130,7 @@ const AdminDashboardContent = () => {
     const fetchEmployees = async () => {
         setLoadingEmployees(true);
         try {
-           
+
         } catch (error) {
             console.error('Error fetching employees:', error);
         } finally {
@@ -333,8 +333,8 @@ const AdminDashboardContent = () => {
     };
 
     const stats = [
-        { label: 'Total Members', value: individualMemberships.length.toString(), icon: 'UsersIcon', color: 'bg-blue-500' },
-        { label: 'Active Businesses', value: pendingBusinesses.length.toString(), icon: 'BuildingStorefrontIcon', color: 'bg-green-500' },
+        { label: 'Total Members', value: individualMemberships.length.toString(), icon: 'UsersIcon', color: 'bg-[#1C4D8D]' },
+        { label: 'Active Businesses', value: pendingBusinesses.length.toString(), icon: 'BuildingStorefrontIcon', color: 'bg-emerald-500' },
         { label: 'Pending Approvals', value: (pendingMemberships.length + pendingEmployers.length + pendingAssociations.length + pendingBusinesses.length + pendingB2B.length).toString(), icon: 'ClockIcon', color: 'bg-orange-500' },
         { label: 'Payment Verifications', value: paymentVerifications.length.toString(), icon: 'CurrencyDollarIcon', color: 'bg-purple-500' },
     ];
@@ -342,7 +342,7 @@ const AdminDashboardContent = () => {
     const tabBtn = (tab, label) => (
         <button
             onClick={() => setActiveTab(tab)}
-            className={`px-6 py-3 font-medium transition-colors whitespace-nowrap ${activeTab === tab ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground hover:text-foreground'}`}
+            className={`px-6 py-3 font-medium transition-colors whitespace-nowrap border-b-2 ${activeTab === tab ? 'border-[#1C4D8D] text-[#1C4D8D]' : 'border-transparent text-slate-500 hover:text-slate-900'}`}
         >
             {label}
         </button>
@@ -351,32 +351,32 @@ const AdminDashboardContent = () => {
     const subTabBtn = (current, val, label, setter) => (
         <button
             onClick={() => setter(val)}
-            className={`px-4 py-2 font-medium transition-colors whitespace-nowrap ${current === val ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground hover:text-foreground'}`}
+            className={`px-4 py-2 font-medium transition-colors whitespace-nowrap rounded-lg text-sm ${current === val ? 'bg-[#1C4D8D] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}`}
         >
             {label}
         </button>
     );
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 pt-24 pb-12">
+        <div className="min-h-screen bg-slate-50/50 pt-24 pb-12">
             <div className="max-w-7xl mx-auto px-6">
                 {/* Header */}
                 <div className="mb-8">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
-                    <p className="text-gray-500">Comprehensive platform management and analytics</p>
+                    <h1 className="text-4xl font-bold text-slate-900 mb-2">Admin Dashboard</h1>
+                    <p className="text-slate-500">Comprehensive platform management and analytics</p>
                 </div>
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     {stats.map((stat, index) => (
-                        <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
+                        <div key={index} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-all">
                             <div className="flex items-center gap-4">
-                                <div className={`w-12 h-12 ${stat.color} rounded-xl flex items-center justify-center`}>
+                                <div className={`w-12 h-12 ${stat.color} rounded-xl flex items-center justify-center shadow-lg shadow-black/5`}>
                                     <Icon name={stat.icon} size={24} className="text-white" />
                                 </div>
                                 <div>
-                                    <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                                    <p className="text-sm text-gray-500">{stat.label}</p>
+                                    <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
+                                    <p className="text-sm text-slate-500">{stat.label}</p>
                                 </div>
                             </div>
                         </div>
@@ -384,7 +384,7 @@ const AdminDashboardContent = () => {
                 </div>
 
                 {/* Tab Navigation */}
-                <div className="flex gap-4 mb-8 border-b border-gray-200 overflow-x-auto">
+                <div className="flex gap-4 mb-8 border-b border-slate-200 overflow-x-auto scrollbar-hide">
                     {tabBtn('approvals', 'Approvals')}
                     {tabBtn('payment-verification', 'Payment Verification')}
                     {tabBtn('travel-lock', 'Travel Lock')}
@@ -401,107 +401,107 @@ const AdminDashboardContent = () => {
                 {/* ── Approvals Tab ── */}
                 {activeTab === 'approvals' && (
                     <div className="space-y-6">
-                        <div className="flex gap-4 border-b border-gray-200 overflow-x-auto">
+                        <div className="flex gap-4 border-b border-slate-200 overflow-x-auto pb-2">
                             {subTabBtn(approvalSubTab, 'memberships', `Individual Memberships (${pendingMemberships.length})`, setApprovalSubTab)}
                             {subTabBtn(approvalSubTab, 'employers', `Employers (${pendingEmployers.length})`, setApprovalSubTab)}
                             {subTabBtn(approvalSubTab, 'associations', `Associations (${pendingAssociations.length})`, setApprovalSubTab)}
                             {subTabBtn(approvalSubTab, 'businesses', `Business Partners (${pendingBusinesses.length})`, setApprovalSubTab)}
                             {subTabBtn(approvalSubTab, 'b2b', `B2B Partners (${pendingB2B.length})`, setApprovalSubTab)}
                         </div>
-                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                            <h2 className="text-xl font-bold text-gray-900 mb-6">
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                            <h2 className="text-xl font-bold text-slate-900 mb-6">
                                 Pending {approvalSubTab.charAt(0).toUpperCase() + approvalSubTab.slice(1)} Approvals
                             </h2>
                             {loadingApprovals ? (
-                                <p className="text-center py-8 text-gray-500">Loading...</p>
+                                <p className="text-center py-8 text-slate-500">Loading...</p>
                             ) : (
                                 <div className="space-y-4">
                                     {approvalSubTab === 'memberships' && pendingMemberships.map((item) => (
-                                        <div key={item.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                                        <div key={item.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                                                    <Icon name="UserIcon" size={20} className="text-blue-600" />
+                                                <div className="w-10 h-10 bg-[#1C4D8D]/10 rounded-lg flex items-center justify-center">
+                                                    <Icon name="UserIcon" size={20} className="text-[#1C4D8D]" />
                                                 </div>
                                                 <div>
-                                                    <p className="font-semibold text-gray-900">{item.first_name} {item.last_name}</p>
-                                                    <p className="text-sm text-gray-500">{item.email} • {item.district?.replace('_', ' ')} • ${item.payment_amount}</p>
-                                                    <p className="text-xs text-gray-400">Status: {item.status?.replace('_', ' ')} • Payment: {item.payment_status}</p>
+                                                    <p className="font-semibold text-slate-900">{item.first_name} {item.last_name}</p>
+                                                    <p className="text-sm text-slate-500">{item.email} • {item.district?.replace('_', ' ')} • ${item.payment_amount}</p>
+                                                    <p className="text-xs text-slate-400">Status: {item.status?.replace('_', ' ')} • Payment: {item.payment_status}</p>
                                                 </div>
                                             </div>
                                             <div className="flex gap-2">
-                                                <button onClick={() => handleApproval(item.id, 'approve', 'membership')} className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Approve</button>
+                                                <button onClick={() => handleApproval(item.id, 'approve', 'membership')} className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">Approve</button>
                                                 <button onClick={() => handleApproval(item.id, 'reject', 'membership')} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Reject</button>
                                             </div>
                                         </div>
                                     ))}
                                     {approvalSubTab === 'employers' && pendingEmployers.map((item) => (
-                                        <div key={item.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                                        <div key={item.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                                                    <Icon name="BuildingOfficeIcon" size={20} className="text-green-600" />
+                                                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
+                                                    <Icon name="BuildingOfficeIcon" size={20} className="text-emerald-600" />
                                                 </div>
                                                 <div>
-                                                    <p className="font-semibold text-gray-900">{item.organization_name}</p>
-                                                    <p className="text-sm text-gray-500">{item.contact_name} • {item.email} • {item.estimated_members} members</p>
-                                                    <p className="text-xs text-gray-400">Status: {item.status?.replace('_', ' ')} • ${item.total_price || (item.estimated_members * 119.99).toFixed(2)}</p>
+                                                    <p className="font-semibold text-slate-900">{item.organization_name}</p>
+                                                    <p className="text-sm text-slate-500">{item.contact_name} • {item.email} • {item.estimated_members} members</p>
+                                                    <p className="text-xs text-slate-400">Status: {item.status?.replace('_', ' ')} • ${item.total_price || (item.estimated_members * 119.99).toFixed(2)}</p>
                                                 </div>
                                             </div>
                                             <div className="flex gap-2">
-                                                <button onClick={() => handleApproval(item.id, 'approve', 'employer')} className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Approve</button>
+                                                <button onClick={() => handleApproval(item.id, 'approve', 'employer')} className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">Approve</button>
                                                 <button onClick={() => handleApproval(item.id, 'reject', 'employer')} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Reject</button>
                                             </div>
                                         </div>
                                     ))}
                                     {approvalSubTab === 'associations' && pendingAssociations.map((item) => (
-                                        <div key={item.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                                        <div key={item.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
                                             <div className="flex items-center gap-4">
                                                 <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
                                                     <Icon name="UserGroupIcon" size={20} className="text-purple-600" />
                                                 </div>
                                                 <div>
-                                                    <p className="font-semibold text-gray-900">{item.organization_name}</p>
-                                                    <p className="text-sm text-gray-500">{item.contact_name} • {item.email} • {item.estimated_members} members</p>
-                                                    <p className="text-xs text-gray-400">Status: {item.status?.replace('_', ' ')} • ${item.total_price || (item.estimated_members * 89.99).toFixed(2)}</p>
+                                                    <p className="font-semibold text-slate-900">{item.organization_name}</p>
+                                                    <p className="text-sm text-slate-500">{item.contact_name} • {item.email} • {item.estimated_members} members</p>
+                                                    <p className="text-xs text-slate-400">Status: {item.status?.replace('_', ' ')} • ${item.total_price || (item.estimated_members * 89.99).toFixed(2)}</p>
                                                 </div>
                                             </div>
                                             <div className="flex gap-2">
-                                                <button onClick={() => handleApproval(item.id, 'approve', 'association')} className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Approve</button>
+                                                <button onClick={() => handleApproval(item.id, 'approve', 'association')} className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">Approve</button>
                                                 <button onClick={() => handleApproval(item.id, 'reject', 'association')} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Reject</button>
                                             </div>
                                         </div>
                                     ))}
                                     {approvalSubTab === 'businesses' && pendingBusinesses.map((item) => (
-                                        <div key={item.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                                        <div key={item.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
                                             <div className="flex items-center gap-4">
                                                 <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
                                                     <Icon name="BuildingStorefrontIcon" size={20} className="text-orange-600" />
                                                 </div>
                                                 <div>
-                                                    <p className="font-semibold text-gray-900">{item.name}</p>
-                                                    <p className="text-sm text-gray-500">{item.category} • {item.location}</p>
-                                                    <p className="text-xs text-gray-400">{item.email} • {item.phone}</p>
+                                                    <p className="font-semibold text-slate-900">{item.name}</p>
+                                                    <p className="text-sm text-slate-500">{item.category} • {item.location}</p>
+                                                    <p className="text-xs text-slate-400">{item.email} • {item.phone}</p>
                                                 </div>
                                             </div>
                                             <div className="flex gap-2">
-                                                <button onClick={() => handleApproval(item.id, 'approve', 'business')} className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Approve</button>
+                                                <button onClick={() => handleApproval(item.id, 'approve', 'business')} className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">Approve</button>
                                                 <button onClick={() => handleApproval(item.id, 'reject', 'business')} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Reject</button>
                                             </div>
                                         </div>
                                     ))}
                                     {approvalSubTab === 'b2b' && pendingB2B.map((item) => (
-                                        <div key={item.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                                        <div key={item.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
                                             <div className="flex items-center gap-4">
                                                 <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
                                                     <Icon name="BriefcaseIcon" size={20} className="text-indigo-600" />
                                                 </div>
                                                 <div>
-                                                    <p className="font-semibold text-gray-900">{item.company_name}</p>
-                                                    <p className="text-sm text-gray-500">{item.partner_type?.replace('_', ' ')} • {item.category}</p>
-                                                    <p className="text-xs text-gray-400">{item.contact_email} • {item.contact_phone}</p>
+                                                    <p className="font-semibold text-slate-900">{item.company_name}</p>
+                                                    <p className="text-sm text-slate-500">{item.partner_type?.replace('_', ' ')} • {item.category}</p>
+                                                    <p className="text-xs text-slate-400">{item.contact_email} • {item.contact_phone}</p>
                                                 </div>
                                             </div>
                                             <div className="flex gap-2">
-                                                <button onClick={() => handleApproval(item.id, 'approve', 'b2b')} className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Approve</button>
+                                                <button onClick={() => handleApproval(item.id, 'approve', 'b2b')} className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">Approve</button>
                                                 <button onClick={() => handleApproval(item.id, 'reject', 'b2b')} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Reject</button>
                                             </div>
                                         </div>
@@ -511,7 +511,7 @@ const AdminDashboardContent = () => {
                                         (approvalSubTab === 'associations' && pendingAssociations.length === 0) ||
                                         (approvalSubTab === 'businesses' && pendingBusinesses.length === 0) ||
                                         (approvalSubTab === 'b2b' && pendingB2B.length === 0)) && (
-                                            <p className="text-center py-8 text-gray-500">No pending approvals</p>
+                                            <p className="text-center py-8 text-slate-500">No pending approvals</p>
                                         )}
                                 </div>
                             )}
@@ -521,34 +521,34 @@ const AdminDashboardContent = () => {
 
                 {/* ── Payment Verification Tab ── */}
                 {activeTab === 'payment-verification' && (
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                        <h2 className="text-xl font-bold text-gray-900 mb-6">Payment Verification</h2>
+                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                        <h2 className="text-xl font-bold text-slate-900 mb-6">Payment Verification</h2>
                         {loadingPayments ? (
-                            <p className="text-center py-8 text-gray-500">Loading...</p>
+                            <p className="text-center py-8 text-slate-500">Loading...</p>
                         ) : paymentVerifications.length === 0 ? (
-                            <p className="text-center py-8 text-gray-500">No pending payment verifications</p>
+                            <p className="text-center py-8 text-slate-500">No pending payment verifications</p>
                         ) : (
                             <div className="space-y-4">
                                 {paymentVerifications.map((payment) => (
-                                    <div key={payment.id} className="border border-gray-200 rounded-xl p-6">
+                                    <div key={payment.id} className="border border-slate-200 rounded-xl p-6">
                                         <div className="flex items-start justify-between mb-4">
                                             <div>
-                                                <h3 className="text-lg font-bold text-gray-900">{payment.user_profiles?.full_name}</h3>
-                                                <p className="text-sm text-gray-500">{payment.user_profiles?.email} • {payment.user_profiles?.role}</p>
-                                                <p className="text-sm text-gray-500">Year: {payment.billing_year} • Amount: ${payment.annual_fee}</p>
+                                                <h3 className="text-lg font-bold text-slate-900">{payment.user_profiles?.full_name}</h3>
+                                                <p className="text-sm text-slate-500">{payment.user_profiles?.email} • {payment.user_profiles?.role}</p>
+                                                <p className="text-sm text-slate-500">Year: {payment.billing_year} • Amount: ${payment.annual_fee}</p>
                                             </div>
                                             <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">Pending Review</span>
                                         </div>
                                         {payment.payment_proof_url && (
                                             <div className="mb-4">
-                                                <p className="text-sm font-medium text-gray-900 mb-2">Payment Proof:</p>
-                                                <a href={payment.payment_proof_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm">
+                                                <p className="text-sm font-medium text-slate-900 mb-2">Payment Proof:</p>
+                                                <a href={payment.payment_proof_url} target="_blank" rel="noopener noreferrer" className="text-[#1C4D8D] hover:underline text-sm">
                                                     View Uploaded Document
                                                 </a>
                                             </div>
                                         )}
                                         <div className="flex gap-3">
-                                            <button onClick={() => handlePaymentVerification(payment.id, 'approve')} className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Approve Payment</button>
+                                            <button onClick={() => handlePaymentVerification(payment.id, 'approve')} className="px-6 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">Approve Payment</button>
                                             <button onClick={() => handlePaymentVerification(payment.id, 'reject')} className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Reject Payment</button>
                                         </div>
                                     </div>
@@ -560,44 +560,44 @@ const AdminDashboardContent = () => {
 
                 {/* ── Travel Lock Tab ── */}
                 {activeTab === 'travel-lock' && (
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
+                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-xl font-bold text-gray-900">Travel Lock Controls</h2>
+                            <h2 className="text-xl font-bold text-slate-900">Travel Lock Controls</h2>
                             <input
                                 type="text"
                                 placeholder="Search by employer..."
                                 value={searchEmployer}
                                 onChange={(e) => setSearchEmployer(e.target.value)}
-                                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]"
                             />
                         </div>
                         {loadingEmployees ? (
-                            <p className="text-center py-8 text-gray-500">Loading...</p>
+                            <p className="text-center py-8 text-slate-500">Loading...</p>
                         ) : employees.length === 0 ? (
-                            <p className="text-center py-8 text-gray-500">No employees found</p>
+                            <p className="text-center py-8 text-slate-500">No employees found</p>
                         ) : (
                             <div className="overflow-x-auto">
                                 <table className="w-full">
                                     <thead>
-                                        <tr className="border-b border-gray-200">
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Employee Name</th>
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Email</th>
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Employer</th>
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Status</th>
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Travel Lock</th>
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Actions</th>
+                                        <tr className="border-b border-slate-200">
+                                            <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Employee Name</th>
+                                            <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Email</th>
+                                            <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Employer</th>
+                                            <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Status</th>
+                                            <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Travel Lock</th>
+                                            <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {employees
                                             .filter(emp => !searchEmployer || emp.user_profiles?.full_name?.toLowerCase().includes(searchEmployer.toLowerCase()))
                                             .map((employee) => (
-                                                <tr key={employee.id} className="border-b border-gray-200 hover:bg-gray-50">
-                                                    <td className="py-3 px-4 text-sm text-gray-900">{employee.full_name}</td>
-                                                    <td className="py-3 px-4 text-sm text-gray-900">{employee.email}</td>
-                                                    <td className="py-3 px-4 text-sm text-gray-900">{employee.user_profiles?.full_name || 'N/A'}</td>
+                                                <tr key={employee.id} className="border-b border-slate-200 hover:bg-slate-50">
+                                                    <td className="py-3 px-4 text-sm text-slate-900">{employee.full_name}</td>
+                                                    <td className="py-3 px-4 text-sm text-slate-900">{employee.email}</td>
+                                                    <td className="py-3 px-4 text-sm text-slate-900">{employee.user_profiles?.full_name || 'N/A'}</td>
                                                     <td className="py-3 px-4 text-sm">
-                                                        <span className={`px-2 py-1 rounded-full text-xs ${employee.status === 'active' ? 'bg-green-100 text-green-800' : employee.status === 'travel_locked' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'}`}>
+                                                        <span className={`px-2 py-1 rounded-full text-xs ${employee.status === 'active' ? 'bg-emerald-100 text-emerald-800' : employee.status === 'travel_locked' ? 'bg-red-100 text-red-800' : 'bg-slate-100 text-slate-800'}`}>
                                                             {employee.status?.replace('_', ' ')}
                                                         </span>
                                                     </td>
@@ -607,7 +607,7 @@ const AdminDashboardContent = () => {
                                                                 <Icon name="LockClosedIcon" size={16} /> Locked
                                                             </span>
                                                         ) : (
-                                                            <span className="flex items-center gap-2 text-green-600">
+                                                            <span className="flex items-center gap-2 text-emerald-600">
                                                                 <Icon name="LockOpenIcon" size={16} /> Unlocked
                                                             </span>
                                                         )}
@@ -615,7 +615,7 @@ const AdminDashboardContent = () => {
                                                     <td className="py-3 px-4 text-sm">
                                                         <button
                                                             onClick={() => toggleTravelLock(employee.id, employee.is_travel_locked)}
-                                                            className={`px-4 py-2 rounded-lg transition-colors ${employee.is_travel_locked ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-red-500 text-white hover:bg-red-600'}`}
+                                                            className={`px-4 py-2 rounded-lg transition-colors ${employee.is_travel_locked ? 'bg-emerald-500 text-white hover:bg-emerald-600' : 'bg-red-500 text-white hover:bg-red-600'}`}
                                                         >
                                                             {employee.is_travel_locked ? 'Unlock' : 'Lock'}
                                                         </button>
@@ -632,26 +632,26 @@ const AdminDashboardContent = () => {
                 {/* ── Analytics Tab ── */}
                 {activeTab === 'analytics' && (
                     <div className="space-y-6">
-                        <div className="flex gap-4 border-b border-gray-200">
+                        <div className="flex gap-4 border-b border-slate-200">
                             {subTabBtn(analyticsSubTab, 'revenue', 'Revenue Analytics', setAnalyticsSubTab)}
                             {subTabBtn(analyticsSubTab, 'membership', 'Membership Analytics', setAnalyticsSubTab)}
                         </div>
 
                         {/* Filters */}
-                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                            <h3 className="text-lg font-bold text-gray-900 mb-4">Filters</h3>
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                            <h3 className="text-lg font-bold text-slate-900 mb-4">Filters</h3>
                             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-900 mb-2">Start Date</label>
-                                    <input type="date" value={analyticsFilters.startDate} onChange={(e) => setAnalyticsFilters({ ...analyticsFilters, startDate: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <label className="block text-sm font-medium text-slate-900 mb-2">Start Date</label>
+                                    <input type="date" value={analyticsFilters.startDate} onChange={(e) => setAnalyticsFilters({ ...analyticsFilters, startDate: e.target.value })} className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]" />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-900 mb-2">End Date</label>
-                                    <input type="date" value={analyticsFilters.endDate} onChange={(e) => setAnalyticsFilters({ ...analyticsFilters, endDate: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <label className="block text-sm font-medium text-slate-900 mb-2">End Date</label>
+                                    <input type="date" value={analyticsFilters.endDate} onChange={(e) => setAnalyticsFilters({ ...analyticsFilters, endDate: e.target.value })} className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]" />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-900 mb-2">Comparison</label>
-                                    <select value={analyticsFilters.comparisonType} onChange={(e) => setAnalyticsFilters({ ...analyticsFilters, comparisonType: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <label className="block text-sm font-medium text-slate-900 mb-2">Comparison</label>
+                                    <select value={analyticsFilters.comparisonType} onChange={(e) => setAnalyticsFilters({ ...analyticsFilters, comparisonType: e.target.value })} className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]">
                                         <option value="yoy">Year over Year</option>
                                         <option value="qoq">Quarter over Quarter</option>
                                         <option value="mom">Month over Month</option>
@@ -659,8 +659,8 @@ const AdminDashboardContent = () => {
                                 </div>
                                 {analyticsSubTab === 'membership' && (
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-900 mb-2">District</label>
-                                        <select value={analyticsFilters.district} onChange={(e) => setAnalyticsFilters({ ...analyticsFilters, district: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <label className="block text-sm font-medium text-slate-900 mb-2">District</label>
+                                        <select value={analyticsFilters.district} onChange={(e) => setAnalyticsFilters({ ...analyticsFilters, district: e.target.value })} className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]">
                                             <option value="all">All Districts</option>
                                             <option value="george_town">George Town</option>
                                             <option value="west_bay">West Bay</option>
@@ -673,8 +673,8 @@ const AdminDashboardContent = () => {
                                     </div>
                                 )}
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-900 mb-2">&nbsp;</label>
-                                    <button onClick={exportAnalytics} className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                                    <label className="block text-sm font-medium text-slate-900 mb-2">&nbsp;</label>
+                                    <button onClick={exportAnalytics} className="w-full px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors flex items-center justify-center gap-2">
                                         <Icon name="ArrowDownTrayIcon" size={16} /> Export CSV
                                     </button>
                                 </div>
@@ -685,30 +685,30 @@ const AdminDashboardContent = () => {
                         {analyticsSubTab === 'revenue' && (
                             <div className="space-y-6">
                                 {loadingAnalytics ? (
-                                    <p className="text-center py-8 text-gray-500">Loading analytics...</p>
+                                    <p className="text-center py-8 text-slate-500">Loading analytics...</p>
                                 ) : revenueData ? (
                                     <>
                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                                                <p className="text-sm text-gray-500 mb-2">Current Period Revenue</p>
-                                                <p className="text-3xl font-bold text-gray-900">${revenueData.currentRevenue.toFixed(2)}</p>
-                                                <p className="text-xs text-gray-400 mt-1">{revenueData.totalTransactions} transactions</p>
+                                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                                <p className="text-sm text-slate-500 mb-2">Current Period Revenue</p>
+                                                <p className="text-3xl font-bold text-slate-900">${revenueData.currentRevenue.toFixed(2)}</p>
+                                                <p className="text-xs text-slate-400 mt-1">{revenueData.totalTransactions} transactions</p>
                                             </div>
-                                            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                                                <p className="text-sm text-gray-500 mb-2">Comparison Period Revenue</p>
-                                                <p className="text-3xl font-bold text-gray-900">${revenueData.comparisonRevenue.toFixed(2)}</p>
-                                                <p className="text-xs text-gray-400 mt-1">{analyticsFilters.comparisonType.toUpperCase()}</p>
+                                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                                <p className="text-sm text-slate-500 mb-2">Comparison Period Revenue</p>
+                                                <p className="text-3xl font-bold text-slate-900">${revenueData.comparisonRevenue.toFixed(2)}</p>
+                                                <p className="text-xs text-slate-400 mt-1">{analyticsFilters.comparisonType.toUpperCase()}</p>
                                             </div>
-                                            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                                                <p className="text-sm text-gray-500 mb-2">Change</p>
-                                                <p className={`text-3xl font-bold ${revenueData.percentChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                                <p className="text-sm text-slate-500 mb-2">Change</p>
+                                                <p className={`text-3xl font-bold ${revenueData.percentChange >= 0 ? 'text-emerald-600' : 'text-red-600'}`}>
                                                     {revenueData.percentChange >= 0 ? '+' : ''}{revenueData.percentChange.toFixed(1)}%
                                                 </p>
-                                                <p className="text-xs text-gray-400 mt-1">{analyticsFilters.comparisonType.toUpperCase()} comparison</p>
+                                                <p className="text-xs text-slate-400 mt-1">{analyticsFilters.comparisonType.toUpperCase()} comparison</p>
                                             </div>
                                         </div>
-                                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                                            <h3 className="text-lg font-bold text-gray-900 mb-4">Revenue Trend</h3>
+                                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                            <h3 className="text-lg font-bold text-slate-900 mb-4">Revenue Trend</h3>
                                             <ResponsiveContainer width="100%" height={400}>
                                                 <LineChart data={revenueData.chartData}>
                                                     <CartesianGrid strokeDasharray="3 3" />
@@ -722,7 +722,7 @@ const AdminDashboardContent = () => {
                                         </div>
                                     </>
                                 ) : (
-                                    <p className="text-center py-8 text-gray-500">No data available</p>
+                                    <p className="text-center py-8 text-slate-500">No data available</p>
                                 )}
                             </div>
                         )}
@@ -731,17 +731,17 @@ const AdminDashboardContent = () => {
                         {analyticsSubTab === 'membership' && (
                             <div className="space-y-6">
                                 {loadingAnalytics ? (
-                                    <p className="text-center py-8 text-gray-500">Loading analytics...</p>
+                                    <p className="text-center py-8 text-slate-500">Loading analytics...</p>
                                 ) : membershipData ? (
                                     <>
-                                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                                            <p className="text-sm text-gray-500 mb-2">Total Members</p>
-                                            <p className="text-4xl font-bold text-gray-900">{membershipData.total}</p>
-                                            <p className="text-xs text-gray-400 mt-1">In selected period</p>
+                                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                            <p className="text-sm text-slate-500 mb-2">Total Members</p>
+                                            <p className="text-4xl font-bold text-slate-900">{membershipData.total}</p>
+                                            <p className="text-xs text-slate-400 mt-1">In selected period</p>
                                         </div>
                                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                                            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                                                <h3 className="text-lg font-bold text-gray-900 mb-4">Members by Type</h3>
+                                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                                <h3 className="text-lg font-bold text-slate-900 mb-4">Members by Type</h3>
                                                 <ResponsiveContainer width="100%" height={300}>
                                                     <PieChart>
                                                         <Pie data={membershipData.byType} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100} label>
@@ -754,8 +754,8 @@ const AdminDashboardContent = () => {
                                                     </PieChart>
                                                 </ResponsiveContainer>
                                             </div>
-                                            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                                                <h3 className="text-lg font-bold text-gray-900 mb-4">Members by District</h3>
+                                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                                <h3 className="text-lg font-bold text-slate-900 mb-4">Members by District</h3>
                                                 <ResponsiveContainer width="100%" height={300}>
                                                     <BarChart data={membershipData.byDistrict}>
                                                         <CartesianGrid strokeDasharray="3 3" />
@@ -767,8 +767,8 @@ const AdminDashboardContent = () => {
                                                 </ResponsiveContainer>
                                             </div>
                                         </div>
-                                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                                            <h3 className="text-lg font-bold text-gray-900 mb-4">Membership Growth Trend</h3>
+                                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                            <h3 className="text-lg font-bold text-slate-900 mb-4">Membership Growth Trend</h3>
                                             <ResponsiveContainer width="100%" height={300}>
                                                 <LineChart data={membershipData.byMonth}>
                                                     <CartesianGrid strokeDasharray="3 3" />
@@ -782,7 +782,7 @@ const AdminDashboardContent = () => {
                                         </div>
                                     </>
                                 ) : (
-                                    <p className="text-center py-8 text-gray-500">No data available</p>
+                                    <p className="text-center py-8 text-slate-500">No data available</p>
                                 )}
                             </div>
                         )}
@@ -791,15 +791,15 @@ const AdminDashboardContent = () => {
 
                 {/* ── Categories Tab ── */}
                 {activeTab === 'categories' && (
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
+                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-xl font-bold text-gray-900">Manage Categories</h2>
-                            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Add Category</button>
+                            <h2 className="text-xl font-bold text-slate-900">Manage Categories</h2>
+                            <button className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors">Add Category</button>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {['Dining', 'Fitness', 'Retail', 'Entertainment', 'Services', 'Travel'].map((category) => (
-                                <div key={category} className="p-4 bg-gray-50 rounded-xl flex items-center justify-between">
-                                    <span className="font-medium text-gray-900">{category}</span>
+                                <div key={category} className="p-4 bg-slate-50 rounded-xl flex items-center justify-between">
+                                    <span className="font-medium text-slate-900">{category}</span>
                                     <button className="text-red-500 hover:text-red-600"><Icon name="TrashIcon" size={20} /></button>
                                 </div>
                             ))}
@@ -809,8 +809,8 @@ const AdminDashboardContent = () => {
 
                 {/* ── Reports Tab ── */}
                 {activeTab === 'reports' && (
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                        <h2 className="text-xl font-bold text-gray-900 mb-6">Export Reports</h2>
+                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                        <h2 className="text-xl font-bold text-slate-900 mb-6">Export Reports</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {[
                                 { icon: 'DocumentTextIcon', title: 'Member Report', desc: 'Export all member data to CSV' },
@@ -818,10 +818,10 @@ const AdminDashboardContent = () => {
                                 { icon: 'TicketIcon', title: 'Redemption Report', desc: 'Export all redemption history' },
                                 { icon: 'CurrencyDollarIcon', title: 'Revenue Report', desc: 'Export financial data' },
                             ].map((r) => (
-                                <button key={r.title} className="p-6 bg-gray-50 rounded-xl text-left hover:bg-gray-100 transition-colors">
-                                    <Icon name={r.icon} size={24} className="text-blue-600 mb-2" />
-                                    <p className="font-semibold text-gray-900 mb-1">{r.title}</p>
-                                    <p className="text-sm text-gray-500">{r.desc}</p>
+                                <button key={r.title} className="p-6 bg-slate-50 rounded-xl text-left hover:bg-slate-100 transition-colors">
+                                    <Icon name={r.icon} size={24} className="text-[#1C4D8D] mb-2" />
+                                    <p className="font-semibold text-slate-900 mb-1">{r.title}</p>
+                                    <p className="text-sm text-slate-500">{r.desc}</p>
                                 </button>
                             ))}
                         </div>
@@ -831,114 +831,114 @@ const AdminDashboardContent = () => {
                 {/* ── Banners Tab ── */}
                 {activeTab === 'banners' && (
                     <div className="space-y-6">
-                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">Banner Settings</h2>
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                            <h2 className="text-2xl font-bold text-slate-900 mb-6">Banner Settings</h2>
                             <div className="space-y-4">
                                 {bannerSettings.map((setting) => (
-                                    <div key={setting.id} className="border border-gray-200 rounded-xl p-4">
+                                    <div key={setting.id} className="border border-slate-200 rounded-xl p-4">
                                         <div className="flex items-center justify-between mb-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                                                    <Icon name="RectangleStackIcon" size={20} className="text-blue-600" />
+                                                <div className="w-10 h-10 bg-[#1C4D8D]/10 rounded-lg flex items-center justify-center">
+                                                    <Icon name="RectangleStackIcon" size={20} className="text-[#1C4D8D]" />
                                                 </div>
                                                 <div>
-                                                    <h3 className="font-bold text-gray-900 capitalize">{setting.position} Banner</h3>
-                                                    <p className="text-sm text-gray-500">728 x 200 pixels</p>
+                                                    <h3 className="font-bold text-slate-900 capitalize">{setting.position} Banner</h3>
+                                                    <p className="text-sm text-slate-500">728 x 200 pixels</p>
                                                 </div>
                                             </div>
                                             {editingSettings === setting.id ? (
-                                                <button onClick={cancelEditing} className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">Cancel</button>
+                                                <button onClick={cancelEditing} className="px-4 py-2 bg-slate-500 text-white rounded-lg hover:bg-slate-600 transition-colors">Cancel</button>
                                             ) : (
-                                                <button onClick={() => startEditing(setting)} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Edit Settings</button>
+                                                <button onClick={() => startEditing(setting)} className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors">Edit Settings</button>
                                             )}
                                         </div>
                                         {editingSettings === setting.id ? (
                                             <div className="space-y-4">
                                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                                                    <div className="bg-white rounded-lg p-4 border border-gray-100">
-                                                        <p className="text-sm text-gray-500 mb-1">Max Slots</p>
-                                                        <input type="number" value={editFormData.max_slots || ''} onChange={(e) => setEditFormData({ ...editFormData, max_slots: parseInt(e.target.value) })} className="w-full text-2xl font-bold text-gray-900 border border-gray-300 rounded px-2 py-1" />
+                                                    <div className="bg-white rounded-lg p-4 border border-slate-100">
+                                                        <p className="text-sm text-slate-500 mb-1">Max Slots</p>
+                                                        <input type="number" value={editFormData.max_slots || ''} onChange={(e) => setEditFormData({ ...editFormData, max_slots: parseInt(e.target.value) })} className="w-full text-2xl font-bold text-slate-900 border border-slate-300 rounded px-2 py-1" />
                                                     </div>
-                                                    <div className="bg-white rounded-lg p-4 border border-gray-100">
-                                                        <p className="text-sm text-gray-500 mb-2">Monthly Price</p>
-                                                        <input type="number" step="0.01" value={editFormData.monthly_price || ''} onChange={(e) => setEditFormData({ ...editFormData, monthly_price: parseFloat(e.target.value) })} className="w-full text-xl font-bold text-gray-900 border border-gray-300 rounded px-2 py-1" placeholder="500.00" />
+                                                    <div className="bg-white rounded-lg p-4 border border-slate-100">
+                                                        <p className="text-sm text-slate-500 mb-2">Monthly Price</p>
+                                                        <input type="number" step="0.01" value={editFormData.monthly_price || ''} onChange={(e) => setEditFormData({ ...editFormData, monthly_price: parseFloat(e.target.value) })} className="w-full text-xl font-bold text-slate-900 border border-slate-300 rounded px-2 py-1" placeholder="500.00" />
                                                     </div>
-                                                    <div className="bg-white rounded-lg p-4 border border-gray-100">
-                                                        <p className="text-sm text-gray-500 mb-2">Semi-Annual Discount (%)</p>
-                                                        <input type="number" step="1" value={editFormData.six_month_discount || ''} onChange={(e) => setEditFormData({ ...editFormData, six_month_discount: parseFloat(e.target.value) })} className="w-full text-xl font-bold text-gray-900 border border-gray-300 rounded px-2 py-1" placeholder="10" />
+                                                    <div className="bg-white rounded-lg p-4 border border-slate-100">
+                                                        <p className="text-sm text-slate-500 mb-2">Semi-Annual Discount (%)</p>
+                                                        <input type="number" step="1" value={editFormData.six_month_discount || ''} onChange={(e) => setEditFormData({ ...editFormData, six_month_discount: parseFloat(e.target.value) })} className="w-full text-xl font-bold text-slate-900 border border-slate-300 rounded px-2 py-1" placeholder="10" />
                                                     </div>
-                                                    <div className="bg-white rounded-lg p-4 border border-gray-100">
-                                                        <p className="text-sm text-gray-500 mb-2">Annual Discount (%)</p>
-                                                        <input type="number" step="1" value={editFormData.annual_discount || ''} onChange={(e) => setEditFormData({ ...editFormData, annual_discount: parseFloat(e.target.value) })} className="w-full text-xl font-bold text-gray-900 border border-gray-300 rounded px-2 py-1" placeholder="15" />
+                                                    <div className="bg-white rounded-lg p-4 border border-slate-100">
+                                                        <p className="text-sm text-slate-500 mb-2">Annual Discount (%)</p>
+                                                        <input type="number" step="1" value={editFormData.annual_discount || ''} onChange={(e) => setEditFormData({ ...editFormData, annual_discount: parseFloat(e.target.value) })} className="w-full text-xl font-bold text-slate-900 border border-slate-300 rounded px-2 py-1" placeholder="15" />
                                                     </div>
                                                 </div>
-                                                <div className="flex items-center gap-3 bg-white rounded-lg p-4 border border-gray-100">
-                                                    <input type="checkbox" checked={editFormData.rotation_enabled || false} onChange={(e) => setEditFormData({ ...editFormData, rotation_enabled: e.target.checked })} className="w-5 h-5 text-blue-600" />
-                                                    <span className="text-sm text-gray-900">Enable automatic rotation</span>
+                                                <div className="flex items-center gap-3 bg-white rounded-lg p-4 border border-slate-100">
+                                                    <input type="checkbox" checked={editFormData.rotation_enabled || false} onChange={(e) => setEditFormData({ ...editFormData, rotation_enabled: e.target.checked })} className="w-5 h-5 text-[#1C4D8D]" />
+                                                    <span className="text-sm text-slate-900">Enable automatic rotation</span>
                                                 </div>
                                                 <div className="flex gap-3">
-                                                    <button onClick={() => updateBannerSettings(setting.id)} className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Save Changes</button>
-                                                    <button onClick={cancelEditing} className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">Cancel</button>
+                                                    <button onClick={() => updateBannerSettings(setting.id)} className="px-6 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">Save Changes</button>
+                                                    <button onClick={cancelEditing} className="px-6 py-2 bg-slate-500 text-white rounded-lg hover:bg-slate-600 transition-colors">Cancel</button>
                                                 </div>
                                             </div>
                                         ) : (
                                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                                                <div className="bg-white rounded-lg p-4 border border-gray-100">
-                                                    <p className="text-sm text-gray-500 mb-1">Max Slots</p>
-                                                    <p className="text-2xl font-bold text-gray-900">{setting.max_slots}</p>
+                                                <div className="bg-white rounded-lg p-4 border border-slate-100">
+                                                    <p className="text-sm text-slate-500 mb-1">Max Slots</p>
+                                                    <p className="text-2xl font-bold text-slate-900">{setting.max_slots}</p>
                                                 </div>
-                                                <div className="bg-white rounded-lg p-4 border border-gray-100">
-                                                    <p className="text-sm text-gray-500 mb-1">Monthly Price</p>
-                                                    <p className="text-2xl font-bold text-green-600">${setting.monthly_price?.toFixed(2)}</p>
-                                                    <p className="text-xs text-gray-400">Base price per month</p>
+                                                <div className="bg-white rounded-lg p-4 border border-slate-100">
+                                                    <p className="text-sm text-slate-500 mb-1">Monthly Price</p>
+                                                    <p className="text-2xl font-bold text-emerald-600">${setting.monthly_price?.toFixed(2)}</p>
+                                                    <p className="text-xs text-slate-400">Base price per month</p>
                                                 </div>
-                                                <div className="bg-white rounded-lg p-4 border border-gray-100">
-                                                    <p className="text-sm text-gray-500 mb-1">Semi-Annual Price</p>
-                                                    <p className="text-2xl font-bold text-green-600">${(setting.monthly_price * 6 * (1 - (setting.six_month_discount ?? 10) / 100)).toFixed(2)}</p>
-                                                    <p className="text-xs text-green-600">{setting.six_month_discount ?? 10}% discount (6 months)</p>
+                                                <div className="bg-white rounded-lg p-4 border border-slate-100">
+                                                    <p className="text-sm text-slate-500 mb-1">Semi-Annual Price</p>
+                                                    <p className="text-2xl font-bold text-emerald-600">${(setting.monthly_price * 6 * (1 - (setting.six_month_discount ?? 10) / 100)).toFixed(2)}</p>
+                                                    <p className="text-xs text-emerald-600">{setting.six_month_discount ?? 10}% discount (6 months)</p>
                                                 </div>
-                                                <div className="bg-white rounded-lg p-4 border border-gray-100">
-                                                    <p className="text-sm text-gray-500 mb-1">Annual Price</p>
-                                                    <p className="text-2xl font-bold text-green-600">${(setting.monthly_price * 12 * (1 - (setting.annual_discount ?? 15) / 100)).toFixed(2)}</p>
-                                                    <p className="text-xs text-green-600">{setting.annual_discount ?? 15}% discount (12 months)</p>
+                                                <div className="bg-white rounded-lg p-4 border border-slate-100">
+                                                    <p className="text-sm text-slate-500 mb-1">Annual Price</p>
+                                                    <p className="text-2xl font-bold text-emerald-600">${(setting.monthly_price * 12 * (1 - (setting.annual_discount ?? 15) / 100)).toFixed(2)}</p>
+                                                    <p className="text-xs text-emerald-600">{setting.annual_discount ?? 15}% discount (12 months)</p>
                                                 </div>
                                             </div>
                                         )}
                                         <div className="mt-4 flex items-center gap-2">
-                                            <Icon name={setting.rotation_enabled ? 'CheckCircleIcon' : 'XCircleIcon'} size={20} className={setting.rotation_enabled ? 'text-green-500' : 'text-gray-400'} />
-                                            <span className="text-sm text-gray-500">Automatic rotation: {setting.rotation_enabled ? 'Enabled' : 'Disabled'}</span>
+                                            <Icon name={setting.rotation_enabled ? 'CheckCircleIcon' : 'XCircleIcon'} size={20} className={setting.rotation_enabled ? 'text-emerald-500' : 'text-slate-400'} />
+                                            <span className="text-sm text-slate-500">Automatic rotation: {setting.rotation_enabled ? 'Enabled' : 'Disabled'}</span>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-200">
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">Active Banner Ads</h2>
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                            <h2 className="text-2xl font-bold text-slate-900 mb-6">Active Banner Ads</h2>
                             {loadingBanners ? (
-                                <div className="text-center py-8 text-gray-500">Loading banners...</div>
+                                <div className="text-center py-8 text-slate-500">Loading banners...</div>
                             ) : activeBanners.length === 0 ? (
-                                <div className="text-center py-8 text-gray-500">No active banner ads</div>
+                                <div className="text-center py-8 text-slate-500">No active banner ads</div>
                             ) : (
                                 <div className="space-y-4">
                                     {activeBanners.map((banner) => (
-                                        <div key={banner.id} className="border border-gray-200 rounded-xl p-4 flex items-center gap-4">
+                                        <div key={banner.id} className="border border-slate-200 rounded-xl p-4 flex items-center gap-4">
                                             <img src={banner.image_url} alt={banner.title} className="w-24 h-24 object-cover rounded-lg" />
                                             <div className="flex-1">
-                                                <p className="font-semibold text-gray-900">{banner.title}</p>
-                                                <p className="text-sm text-gray-500">{banner.businesses?.name || 'Unknown Business'}</p>
+                                                <p className="font-semibold text-slate-900">{banner.title}</p>
+                                                <p className="text-sm text-slate-500">{banner.businesses?.name || 'Unknown Business'}</p>
                                                 <div className="flex gap-4 mt-2 text-sm">
-                                                    <span className="text-gray-500">Position: <span className="font-medium text-gray-900 capitalize">{banner.position}</span></span>
-                                                    <span className="text-gray-500">Duration: <span className="font-medium text-gray-900">{banner.duration?.replace('_', ' ')}</span></span>
-                                                    <span className="text-gray-500">Price: <span className="font-medium text-gray-900">${banner.price?.toFixed(2)}</span></span>
+                                                    <span className="text-slate-500">Position: <span className="font-medium text-slate-900 capitalize">{banner.position}</span></span>
+                                                    <span className="text-slate-500">Duration: <span className="font-medium text-slate-900">{banner.duration?.replace('_', ' ')}</span></span>
+                                                    <span className="text-slate-500">Price: <span className="font-medium text-slate-900">${banner.price?.toFixed(2)}</span></span>
                                                 </div>
                                                 <div className="flex gap-2 mt-2 text-xs">
-                                                    <span className="text-gray-400">{new Date(banner.start_date).toLocaleDateString()} - {new Date(banner.end_date).toLocaleDateString()}</span>
+                                                    <span className="text-slate-400">{new Date(banner.start_date).toLocaleDateString()} - {new Date(banner.end_date).toLocaleDateString()}</span>
                                                 </div>
                                             </div>
                                             <button
                                                 onClick={() => toggleBannerStatus(banner.id, banner.is_active)}
-                                                className={`px-4 py-2 rounded-lg transition-colors ${banner.is_active ? 'bg-green-100 text-green-700 hover:bg-green-200' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                                                className={`px-4 py-2 rounded-lg transition-colors ${banner.is_active ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}
                                             >
                                                 {banner.is_active ? 'Active' : 'Inactive'}
                                             </button>
@@ -954,51 +954,51 @@ const AdminDashboardContent = () => {
                 {activeTab === 'marketing' && (
                     <div className="space-y-8">
                         <div>
-                            <h2 className="text-2xl font-bold text-gray-900 mb-2">Marketing Exports</h2>
-                            <p className="text-gray-500 mb-6">Export member, association, and business data for CRM integration or marketing campaigns</p>
+                            <h2 className="text-2xl font-bold text-slate-900 mb-2">Marketing Exports</h2>
+                            <p className="text-slate-500 mb-6">Export member, association, and business data for CRM integration or marketing campaigns</p>
                         </div>
                         <div className="grid md:grid-cols-3 gap-6">
-                            <div className="bg-white rounded-xl p-6 border border-gray-200">
+                            <div className="bg-white rounded-xl p-6 border border-slate-200">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                                        <Icon name="UsersIcon" size={24} className="text-blue-600" />
+                                    <div className="w-12 h-12 bg-[#1C4D8D]/10 rounded-lg flex items-center justify-center">
+                                        <Icon name="UsersIcon" size={24} className="text-[#1C4D8D]" />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-gray-900">Members</h3>
-                                        <p className="text-sm text-gray-500">Export member data</p>
+                                        <h3 className="font-semibold text-slate-900">Members</h3>
+                                        <p className="text-sm text-slate-500">Export member data</p>
                                     </div>
                                 </div>
-                                <p className="text-sm text-gray-500 mb-4">Includes: Name, Email, Membership Tier, Status, Expiration, Price, Association</p>
-                                <button onClick={exportMembers} disabled={exportingMembers} className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
+                                <p className="text-sm text-slate-500 mb-4">Includes: Name, Email, Membership Tier, Status, Expiration, Price, Association</p>
+                                <button onClick={exportMembers} disabled={exportingMembers} className="w-full px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
                                     {exportingMembers ? 'Exporting...' : 'Export to CSV'}
                                 </button>
                             </div>
-                            <div className="bg-white rounded-xl p-6 border border-gray-200">
+                            <div className="bg-white rounded-xl p-6 border border-slate-200">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                                        <Icon name="BuildingOfficeIcon" size={24} className="text-green-600" />
+                                    <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
+                                        <Icon name="BuildingOfficeIcon" size={24} className="text-emerald-600" />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-gray-900">Associations</h3>
-                                        <p className="text-sm text-gray-500">Export association data</p>
+                                        <h3 className="font-semibold text-slate-900">Associations</h3>
+                                        <p className="text-sm text-slate-500">Export association data</p>
                                     </div>
                                 </div>
-                                <p className="text-sm text-gray-500 mb-4">Includes: Name, Email, Members Count, Total Revenue, Commission Rate, Status</p>
-                                <button onClick={exportAssociations} disabled={exportingAssociations} className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
+                                <p className="text-sm text-slate-500 mb-4">Includes: Name, Email, Members Count, Total Revenue, Commission Rate, Status</p>
+                                <button onClick={exportAssociations} disabled={exportingAssociations} className="w-full px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
                                     {exportingAssociations ? 'Exporting...' : 'Export to CSV'}
                                 </button>
                             </div>
-                            <div className="bg-white rounded-xl p-6 border border-gray-200">
+                            <div className="bg-white rounded-xl p-6 border border-slate-200">
                                 <div className="flex items-center gap-3 mb-4">
                                     <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
                                         <Icon name="BuildingStorefrontIcon" size={24} className="text-orange-600" />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-gray-900">Businesses</h3>
-                                        <p className="text-sm text-gray-500">Export business data</p>
+                                        <h3 className="font-semibold text-slate-900">Businesses</h3>
+                                        <p className="text-sm text-slate-500">Export business data</p>
                                     </div>
                                 </div>
-                                <p className="text-sm text-gray-500 mb-4">Includes: Business Name, Category, Owner Info, Contact Details, Status, Featured</p>
+                                <p className="text-sm text-slate-500 mb-4">Includes: Business Name, Category, Owner Info, Contact Details, Status, Featured</p>
                                 <button onClick={exportBusinesses} disabled={exportingBusinesses} className="w-full px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
                                     {exportingBusinesses ? 'Exporting...' : 'Export to CSV'}
                                 </button>
@@ -1011,51 +1011,51 @@ const AdminDashboardContent = () => {
                 {activeTab === 'pricing' && (
                     <div className="space-y-8">
                         <div>
-                            <h2 className="text-2xl font-bold text-gray-900 mb-2">Pricing Plans Management</h2>
-                            <p className="text-gray-500">Manage standard pricing for Individual, Business, and Association memberships</p>
+                            <h2 className="text-2xl font-bold text-slate-900 mb-2">Pricing Plans Management</h2>
+                            <p className="text-slate-500">Manage standard pricing for Individual, Business, and Association memberships</p>
                         </div>
-                        <div className="flex gap-4 border-b border-gray-200">
+                        <div className="flex gap-4 border-b border-slate-200">
                             {subTabBtn(pricingSubTab, 'individual', 'Individual', setPricingSubTab)}
                             {subTabBtn(pricingSubTab, 'business', 'Business', setPricingSubTab)}
                             {subTabBtn(pricingSubTab, 'association', 'Association', setPricingSubTab)}
                         </div>
 
                         {pricingSubTab === 'individual' && individualPricing && (
-                            <div className="bg-white rounded-xl p-6 border border-gray-200">
+                            <div className="bg-white rounded-xl p-6 border border-slate-200">
                                 {editingPricing === 'individual' ? (
                                     <div className="space-y-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-900 mb-2">Annual Price (USD)</label>
-                                            <input type="number" step="0.01" value={pricingFormData.annual_price || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, annual_price: parseFloat(e.target.value) })} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="119.99" />
+                                            <label className="block text-sm font-medium text-slate-900 mb-2">Annual Price (USD)</label>
+                                            <input type="number" step="0.01" value={pricingFormData.annual_price || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, annual_price: parseFloat(e.target.value) })} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]" placeholder="119.99" />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-900 mb-2">Description</label>
-                                            <textarea value={pricingFormData.description || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, description: e.target.value })} rows={3} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Fixed annual pricing for individual members" />
+                                            <label className="block text-sm font-medium text-slate-900 mb-2">Description</label>
+                                            <textarea value={pricingFormData.description || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, description: e.target.value })} rows={3} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]" placeholder="Fixed annual pricing for individual members" />
                                         </div>
                                         <div className="flex gap-3">
-                                            <button onClick={() => updateStandardPricing('individual')} className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Save Changes</button>
-                                            <button onClick={() => { setEditingPricing(null); setPricingFormData({}); }} className="px-6 py-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition-colors">Cancel</button>
+                                            <button onClick={() => updateStandardPricing('individual')} className="px-6 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors">Save Changes</button>
+                                            <button onClick={() => { setEditingPricing(null); setPricingFormData({}); }} className="px-6 py-2 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition-colors">Cancel</button>
                                         </div>
                                     </div>
                                 ) : (
                                     <div>
                                         <div className="flex items-start justify-between mb-4">
                                             <div>
-                                                <h3 className="text-xl font-bold text-gray-900 mb-2">Individual Standard Pricing</h3>
-                                                <p className="text-sm text-gray-500">{individualPricing.description || 'Fixed annual pricing for individual members'}</p>
+                                                <h3 className="text-xl font-bold text-slate-900 mb-2">Individual Standard Pricing</h3>
+                                                <p className="text-sm text-slate-500">{individualPricing.description || 'Fixed annual pricing for individual members'}</p>
                                             </div>
-                                            <button onClick={() => { setEditingPricing('individual'); setPricingFormData(individualPricing); }} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+                                            <button onClick={() => { setEditingPricing('individual'); setPricingFormData(individualPricing); }} className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors flex items-center gap-2">
                                                 <Icon name="PencilIcon" size={16} /> Edit
                                             </button>
                                         </div>
                                         <div className="grid md:grid-cols-2 gap-6">
-                                            <div className="bg-gray-50 rounded-lg p-4">
-                                                <p className="text-sm text-gray-500 mb-1">Annual Price</p>
-                                                <p className="text-2xl font-bold text-gray-900">${individualPricing.annual_price?.toFixed(2)}/year</p>
+                                            <div className="bg-slate-50 rounded-lg p-4">
+                                                <p className="text-sm text-slate-500 mb-1">Annual Price</p>
+                                                <p className="text-2xl font-bold text-slate-900">${individualPricing.annual_price?.toFixed(2)}/year</p>
                                             </div>
-                                            <div className="bg-gray-50 rounded-lg p-4">
-                                                <p className="text-sm text-gray-500 mb-1">Payment Method</p>
-                                                <p className="text-lg font-semibold text-gray-900">PayPal Only</p>
+                                            <div className="bg-slate-50 rounded-lg p-4">
+                                                <p className="text-sm text-slate-500 mb-1">Payment Method</p>
+                                                <p className="text-lg font-semibold text-slate-900">PayPal Only</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1064,41 +1064,41 @@ const AdminDashboardContent = () => {
                         )}
 
                         {pricingSubTab === 'business' && businessPricing && (
-                            <div className="bg-white rounded-xl p-6 border border-gray-200">
+                            <div className="bg-white rounded-xl p-6 border border-slate-200">
                                 {editingPricing === 'business' ? (
                                     <div className="space-y-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-900 mb-2">Annual Price (USD per member)</label>
-                                            <input type="number" step="0.01" value={pricingFormData.annual_price || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, annual_price: parseFloat(e.target.value) })} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="99.99" />
+                                            <label className="block text-sm font-medium text-slate-900 mb-2">Annual Price (USD per member)</label>
+                                            <input type="number" step="0.01" value={pricingFormData.annual_price || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, annual_price: parseFloat(e.target.value) })} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]" placeholder="99.99" />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-900 mb-2">Description</label>
-                                            <textarea value={pricingFormData.description || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, description: e.target.value })} rows={3} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Starting price per member per year." />
+                                            <label className="block text-sm font-medium text-slate-900 mb-2">Description</label>
+                                            <textarea value={pricingFormData.description || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, description: e.target.value })} rows={3} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]" placeholder="Starting price per member per year." />
                                         </div>
                                         <div className="flex gap-3">
-                                            <button onClick={() => updateStandardPricing('business')} className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Save Changes</button>
-                                            <button onClick={() => { setEditingPricing(null); setPricingFormData({}); }} className="px-6 py-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition-colors">Cancel</button>
+                                            <button onClick={() => updateStandardPricing('business')} className="px-6 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors">Save Changes</button>
+                                            <button onClick={() => { setEditingPricing(null); setPricingFormData({}); }} className="px-6 py-2 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition-colors">Cancel</button>
                                         </div>
                                     </div>
                                 ) : (
                                     <div>
                                         <div className="flex items-start justify-between mb-4">
                                             <div>
-                                                <h3 className="text-xl font-bold text-gray-900 mb-2">Business Standard Pricing</h3>
-                                                <p className="text-sm text-gray-500">{businessPricing.description || 'Starting price per member per year. Negotiable for 100+ members.'}</p>
+                                                <h3 className="text-xl font-bold text-slate-900 mb-2">Business Standard Pricing</h3>
+                                                <p className="text-sm text-slate-500">{businessPricing.description || 'Starting price per member per year. Negotiable for 100+ members.'}</p>
                                             </div>
-                                            <button onClick={() => { setEditingPricing('business'); setPricingFormData(businessPricing); }} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+                                            <button onClick={() => { setEditingPricing('business'); setPricingFormData(businessPricing); }} className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors flex items-center gap-2">
                                                 <Icon name="PencilIcon" size={16} /> Edit
                                             </button>
                                         </div>
                                         <div className="grid md:grid-cols-2 gap-6">
-                                            <div className="bg-gray-50 rounded-lg p-4">
-                                                <p className="text-sm text-gray-500 mb-1">Starting Annual Price</p>
-                                                <p className="text-2xl font-bold text-gray-900">${businessPricing.annual_price?.toFixed(2)}/member/year</p>
+                                            <div className="bg-slate-50 rounded-lg p-4">
+                                                <p className="text-sm text-slate-500 mb-1">Starting Annual Price</p>
+                                                <p className="text-2xl font-bold text-slate-900">${businessPricing.annual_price?.toFixed(2)}/member/year</p>
                                             </div>
-                                            <div className="bg-gray-50 rounded-lg p-4">
-                                                <p className="text-sm text-gray-500 mb-1">Special Pricing</p>
-                                                <p className="text-lg font-semibold text-gray-900">Negotiable for 100+ members</p>
+                                            <div className="bg-slate-50 rounded-lg p-4">
+                                                <p className="text-sm text-slate-500 mb-1">Special Pricing</p>
+                                                <p className="text-lg font-semibold text-slate-900">Negotiable for 100+ members</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1107,41 +1107,41 @@ const AdminDashboardContent = () => {
                         )}
 
                         {pricingSubTab === 'association' && associationPricing && (
-                            <div className="bg-white rounded-xl p-6 border border-gray-200">
+                            <div className="bg-white rounded-xl p-6 border border-slate-200">
                                 {editingPricing === 'association' ? (
                                     <div className="space-y-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-900 mb-2">Annual Price (USD per member)</label>
-                                            <input type="number" step="0.01" value={pricingFormData.annual_price || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, annual_price: parseFloat(e.target.value) })} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="89.99" />
+                                            <label className="block text-sm font-medium text-slate-900 mb-2">Annual Price (USD per member)</label>
+                                            <input type="number" step="0.01" value={pricingFormData.annual_price || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, annual_price: parseFloat(e.target.value) })} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]" placeholder="89.99" />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-900 mb-2">Description</label>
-                                            <textarea value={pricingFormData.description || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, description: e.target.value })} rows={3} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Starting price per member per year. Negotiable pricing available." />
+                                            <label className="block text-sm font-medium text-slate-900 mb-2">Description</label>
+                                            <textarea value={pricingFormData.description || ''} onChange={(e) => setPricingFormData({ ...pricingFormData, description: e.target.value })} rows={3} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]" placeholder="Starting price per member per year. Negotiable pricing available." />
                                         </div>
                                         <div className="flex gap-3">
-                                            <button onClick={() => updateStandardPricing('association')} className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Save Changes</button>
-                                            <button onClick={() => { setEditingPricing(null); setPricingFormData({}); }} className="px-6 py-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition-colors">Cancel</button>
+                                            <button onClick={() => updateStandardPricing('association')} className="px-6 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors">Save Changes</button>
+                                            <button onClick={() => { setEditingPricing(null); setPricingFormData({}); }} className="px-6 py-2 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition-colors">Cancel</button>
                                         </div>
                                     </div>
                                 ) : (
                                     <div>
                                         <div className="flex items-start justify-between mb-4">
                                             <div>
-                                                <h3 className="text-xl font-bold text-gray-900 mb-2">Association Standard Pricing</h3>
-                                                <p className="text-sm text-gray-500">{associationPricing.description || 'Starting price per member per year. Negotiable pricing available.'}</p>
+                                                <h3 className="text-xl font-bold text-slate-900 mb-2">Association Standard Pricing</h3>
+                                                <p className="text-sm text-slate-500">{associationPricing.description || 'Starting price per member per year. Negotiable pricing available.'}</p>
                                             </div>
-                                            <button onClick={() => { setEditingPricing('association'); setPricingFormData(associationPricing); }} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+                                            <button onClick={() => { setEditingPricing('association'); setPricingFormData(associationPricing); }} className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors flex items-center gap-2">
                                                 <Icon name="PencilIcon" size={16} /> Edit
                                             </button>
                                         </div>
                                         <div className="grid md:grid-cols-2 gap-6">
-                                            <div className="bg-gray-50 rounded-lg p-4">
-                                                <p className="text-sm text-gray-500 mb-1">Starting Annual Price</p>
-                                                <p className="text-2xl font-bold text-gray-900">${associationPricing.annual_price?.toFixed(2)}/member/year</p>
+                                            <div className="bg-slate-50 rounded-lg p-4">
+                                                <p className="text-sm text-slate-500 mb-1">Starting Annual Price</p>
+                                                <p className="text-2xl font-bold text-slate-900">${associationPricing.annual_price?.toFixed(2)}/member/year</p>
                                             </div>
-                                            <div className="bg-gray-50 rounded-lg p-4">
-                                                <p className="text-sm text-gray-500 mb-1">Special Pricing</p>
-                                                <p className="text-lg font-semibold text-gray-900">Negotiable</p>
+                                            <div className="bg-slate-50 rounded-lg p-4">
+                                                <p className="text-sm text-slate-500 mb-1">Special Pricing</p>
+                                                <p className="text-lg font-semibold text-slate-900">Negotiable</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1155,55 +1155,55 @@ const AdminDashboardContent = () => {
                 {activeTab === 'memberships' && (
                     <div className="space-y-8">
                         <div>
-                            <h2 className="text-2xl font-bold text-gray-900 mb-2">Membership Management</h2>
-                            <p className="text-gray-500">Manage individual, business, and association memberships</p>
+                            <h2 className="text-2xl font-bold text-slate-900 mb-2">Membership Management</h2>
+                            <p className="text-slate-500">Manage individual, business, and association memberships</p>
                         </div>
-                        <div className="flex gap-4 border-b border-gray-200 overflow-x-auto">
+                        <div className="flex gap-4 border-b border-slate-200 overflow-x-auto">
                             {subTabBtn(membershipSubTab, 'individual', `Individual (${individualMemberships.length})`, setMembershipSubTab)}
                             {subTabBtn(membershipSubTab, 'organization', `Business/Association (${organizationMemberships.length})`, setMembershipSubTab)}
                             {subTabBtn(membershipSubTab, 'uploads', `Member Uploads (${memberUploads.length})`, setMembershipSubTab)}
                         </div>
 
                         {membershipSubTab === 'individual' && (
-                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
-                                <h3 className="text-xl font-bold text-gray-900 mb-4">Individual Memberships</h3>
+                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                <h3 className="text-xl font-bold text-slate-900 mb-4">Individual Memberships</h3>
                                 {loadingMemberships ? (
-                                    <p className="text-center py-8 text-gray-500">Loading...</p>
+                                    <p className="text-center py-8 text-slate-500">Loading...</p>
                                 ) : individualMemberships.length === 0 ? (
-                                    <p className="text-center py-8 text-gray-500">No individual memberships found</p>
+                                    <p className="text-center py-8 text-slate-500">No individual memberships found</p>
                                 ) : (
                                     <div className="overflow-x-auto">
                                         <table className="w-full">
                                             <thead>
-                                                <tr className="border-b border-gray-200">
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Name</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Email</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Phone</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">District</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Payment</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Email Confirmed</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Status</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Actions</th>
+                                                <tr className="border-b border-slate-200">
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Name</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Email</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Phone</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">District</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Payment</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Email Confirmed</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Status</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {individualMemberships.map((membership) => (
-                                                    <tr key={membership.id} className="border-b border-gray-200 hover:bg-gray-50">
-                                                        <td className="py-3 px-4 text-sm text-gray-900">{membership.first_name} {membership.middle_initial} {membership.last_name}</td>
-                                                        <td className="py-3 px-4 text-sm text-gray-900">{membership.email}</td>
-                                                        <td className="py-3 px-4 text-sm text-gray-900">{membership.phone}</td>
-                                                        <td className="py-3 px-4 text-sm text-gray-900 capitalize">{membership.district?.replace('_', ' ')}</td>
+                                                    <tr key={membership.id} className="border-b border-slate-200 hover:bg-slate-50">
+                                                        <td className="py-3 px-4 text-sm text-slate-900">{membership.first_name} {membership.middle_initial} {membership.last_name}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-900">{membership.email}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-900">{membership.phone}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-900 capitalize">{membership.district?.replace('_', ' ')}</td>
                                                         <td className="py-3 px-4 text-sm">
-                                                            <span className={`px-2 py-1 rounded-full text-xs ${membership.payment_status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>{membership.payment_status}</span>
+                                                            <span className={`px-2 py-1 rounded-full text-xs ${membership.payment_status === 'completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-yellow-100 text-yellow-800'}`}>{membership.payment_status}</span>
                                                         </td>
                                                         <td className="py-3 px-4 text-sm">
-                                                            {membership.email_confirmed ? <span className="text-green-600">Yes</span> : <span className="text-orange-600">Pending</span>}
+                                                            {membership.email_confirmed ? <span className="text-emerald-600">Yes</span> : <span className="text-orange-600">Pending</span>}
                                                         </td>
                                                         <td className="py-3 px-4 text-sm">
                                                             <span className="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800 capitalize">{membership.status?.replace('_', ' ')}</span>
                                                         </td>
                                                         <td className="py-3 px-4 text-sm">
-                                                            <select value={membership.status} onChange={(e) => updateMembershipStatus(membership.id, e.target.value, 'individual')} className="px-3 py-1 border border-gray-300 rounded-lg text-sm">
+                                                            <select value={membership.status} onChange={(e) => updateMembershipStatus(membership.id, e.target.value, 'individual')} className="px-3 py-1 border border-slate-300 rounded-lg text-sm">
                                                                 <option value="submitted">Submitted</option>
                                                                 <option value="payment_pending">Payment Pending</option>
                                                                 <option value="active">Active</option>
@@ -1220,39 +1220,39 @@ const AdminDashboardContent = () => {
                         )}
 
                         {membershipSubTab === 'organization' && (
-                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
-                                <h3 className="text-xl font-bold text-gray-900 mb-4">Organization Memberships</h3>
+                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                <h3 className="text-xl font-bold text-slate-900 mb-4">Organization Memberships</h3>
                                 {loadingMemberships ? (
-                                    <p className="text-center py-8 text-gray-500">Loading...</p>
+                                    <p className="text-center py-8 text-slate-500">Loading...</p>
                                 ) : organizationMemberships.length === 0 ? (
-                                    <p className="text-center py-8 text-gray-500">No organization memberships found</p>
+                                    <p className="text-center py-8 text-slate-500">No organization memberships found</p>
                                 ) : (
                                     <div className="overflow-x-auto">
                                         <table className="w-full">
                                             <thead>
-                                                <tr className="border-b border-gray-200">
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Organization</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Contact</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Type</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Members</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Total Price</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Status</th>
-                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-900">Actions</th>
+                                                <tr className="border-b border-slate-200">
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Organization</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Contact</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Type</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Members</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Total Price</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Status</th>
+                                                    <th className="text-left py-3 px-4 text-sm font-semibold text-slate-900">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {organizationMemberships.map((org) => (
-                                                    <tr key={org.id} className="border-b border-gray-200 hover:bg-gray-50">
-                                                        <td className="py-3 px-4 text-sm text-gray-900">{org.organization_name}</td>
-                                                        <td className="py-3 px-4 text-sm text-gray-900">{org.contact_name}<br /><span className="text-gray-400 text-xs">{org.email}</span></td>
-                                                        <td className="py-3 px-4 text-sm text-gray-900 capitalize">{org.organization_type}</td>
-                                                        <td className="py-3 px-4 text-sm text-gray-900">{org.estimated_members}</td>
-                                                        <td className="py-3 px-4 text-sm text-gray-900">${org.total_price?.toFixed(2)}</td>
+                                                    <tr key={org.id} className="border-b border-slate-200 hover:bg-slate-50">
+                                                        <td className="py-3 px-4 text-sm text-slate-900">{org.organization_name}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-900">{org.contact_name}<br /><span className="text-slate-400 text-xs">{org.email}</span></td>
+                                                        <td className="py-3 px-4 text-sm text-slate-900 capitalize">{org.organization_type}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-900">{org.estimated_members}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-900">${org.total_price?.toFixed(2)}</td>
                                                         <td className="py-3 px-4 text-sm">
                                                             <span className="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800 capitalize">{org.status?.replace('_', ' ')}</span>
                                                         </td>
                                                         <td className="py-3 px-4 text-sm">
-                                                            <select value={org.status} onChange={(e) => updateMembershipStatus(org.id, e.target.value, 'organization')} className="px-3 py-1 border border-gray-300 rounded-lg text-sm">
+                                                            <select value={org.status} onChange={(e) => updateMembershipStatus(org.id, e.target.value, 'organization')} className="px-3 py-1 border border-slate-300 rounded-lg text-sm">
                                                                 <option value="submitted">Submitted</option>
                                                                 <option value="special_pricing_review">Special Pricing Review</option>
                                                                 <option value="approved_payment">Approved - Awaiting Payment</option>
@@ -1270,33 +1270,33 @@ const AdminDashboardContent = () => {
                         )}
 
                         {membershipSubTab === 'uploads' && (
-                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
-                                <h3 className="text-xl font-bold text-gray-900 mb-4">Member Uploads</h3>
+                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                                <h3 className="text-xl font-bold text-slate-900 mb-4">Member Uploads</h3>
                                 {loadingMemberships ? (
-                                    <p className="text-center py-8 text-gray-500">Loading...</p>
+                                    <p className="text-center py-8 text-slate-500">Loading...</p>
                                 ) : memberUploads.length === 0 ? (
-                                    <p className="text-center py-8 text-gray-500">No member uploads found</p>
+                                    <p className="text-center py-8 text-slate-500">No member uploads found</p>
                                 ) : (
                                     <div className="space-y-4">
                                         {memberUploads.map((upload) => (
-                                            <div key={upload.id} className="border border-gray-200 rounded-xl p-4">
+                                            <div key={upload.id} className="border border-slate-200 rounded-xl p-4">
                                                 <div className="flex items-center justify-between mb-3">
                                                     <div>
-                                                        <p className="font-semibold text-gray-900">{upload.organization_memberships?.organization_name}</p>
-                                                        <p className="text-sm text-gray-500">{upload.organization_memberships?.contact_name} • {upload.member_count} members</p>
-                                                        <p className="text-xs text-gray-400">Status: {upload.status?.replace('_', ' ')}</p>
+                                                        <p className="font-semibold text-slate-900">{upload.organization_memberships?.organization_name}</p>
+                                                        <p className="text-sm text-slate-500">{upload.organization_memberships?.contact_name} • {upload.member_count} members</p>
+                                                        <p className="text-xs text-slate-400">Status: {upload.status?.replace('_', ' ')}</p>
                                                     </div>
                                                     <div className="flex gap-2">
                                                         <button
                                                             onClick={() => { setSelectedUpload(upload.id); fetchUploadedMembers(upload.id); }}
-                                                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                                                            className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors text-sm"
                                                         >
                                                             View Members
                                                         </button>
                                                         {upload.status === 'pending' && (
                                                             <button
                                                                 onClick={() => massApproveMembers(upload.id)}
-                                                                className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-sm"
+                                                                className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors text-sm"
                                                             >
                                                                 Mass Approve
                                                             </button>
@@ -1307,19 +1307,19 @@ const AdminDashboardContent = () => {
                                                     <div className="mt-4 overflow-x-auto">
                                                         <table className="w-full text-sm">
                                                             <thead>
-                                                                <tr className="border-b border-gray-200">
-                                                                    <th className="text-left py-2 px-3 font-semibold text-gray-900">Name</th>
-                                                                    <th className="text-left py-2 px-3 font-semibold text-gray-900">Email</th>
-                                                                    <th className="text-left py-2 px-3 font-semibold text-gray-900">Status</th>
+                                                                <tr className="border-b border-slate-200">
+                                                                    <th className="text-left py-2 px-3 font-semibold text-slate-900">Name</th>
+                                                                    <th className="text-left py-2 px-3 font-semibold text-slate-900">Email</th>
+                                                                    <th className="text-left py-2 px-3 font-semibold text-slate-900">Status</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 {uploadedMembers.map((member) => (
-                                                                    <tr key={member.id} className="border-b border-gray-100">
-                                                                        <td className="py-2 px-3 text-gray-900">{member.first_name} {member.last_name}</td>
-                                                                        <td className="py-2 px-3 text-gray-500">{member.email}</td>
+                                                                    <tr key={member.id} className="border-b border-slate-100">
+                                                                        <td className="py-2 px-3 text-slate-900">{member.first_name} {member.last_name}</td>
+                                                                        <td className="py-2 px-3 text-slate-500">{member.email}</td>
                                                                         <td className="py-2 px-3">
-                                                                            <span className={`px-2 py-1 rounded-full text-xs ${member.status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>{member.status}</span>
+                                                                            <span className={`px-2 py-1 rounded-full text-xs ${member.status === 'approved' ? 'bg-emerald-100 text-emerald-800' : 'bg-yellow-100 text-yellow-800'}`}>{member.status}</span>
                                                                         </td>
                                                                     </tr>
                                                                 ))}
@@ -1340,26 +1340,26 @@ const AdminDashboardContent = () => {
                 {activeTab === 'email-templates' && (
                     <div className="space-y-8">
                         <div>
-                            <h2 className="text-2xl font-bold text-gray-900 mb-2">Email Templates</h2>
-                            <p className="text-gray-500">Manage email templates with placeholder support</p>
+                            <h2 className="text-2xl font-bold text-slate-900 mb-2">Email Templates</h2>
+                            <p className="text-slate-500">Manage email templates with placeholder support</p>
                         </div>
-                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
                             {loadingTemplates ? (
-                                <p className="text-center py-8 text-gray-500">Loading...</p>
+                                <p className="text-center py-8 text-slate-500">Loading...</p>
                             ) : emailTemplates.length === 0 ? (
-                                <p className="text-center py-8 text-gray-500">No email templates found</p>
+                                <p className="text-center py-8 text-slate-500">No email templates found</p>
                             ) : (
                                 <div className="space-y-6">
                                     {emailTemplates.map((template) => (
-                                        <div key={template.id} className="border border-gray-200 rounded-lg p-6">
+                                        <div key={template.id} className="border border-slate-200 rounded-lg p-6">
                                             <div className="flex items-start justify-between mb-4">
                                                 <div>
-                                                    <h3 className="text-lg font-bold text-gray-900">{template.template_name}</h3>
-                                                    <p className="text-sm text-gray-500">{template.description}</p>
+                                                    <h3 className="text-lg font-bold text-slate-900">{template.template_name}</h3>
+                                                    <p className="text-sm text-slate-500">{template.description}</p>
                                                 </div>
                                                 <button
                                                     onClick={() => { setEditingTemplate(template.id); setTemplateFormData({ subject: template.subject, body: template.body }); }}
-                                                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
+                                                    className="px-4 py-2 bg-[#1C4D8D] text-white rounded-lg hover:bg-[#1C4D8D]/90 transition-colors text-sm"
                                                 >
                                                     Edit
                                                 </button>
@@ -1367,35 +1367,35 @@ const AdminDashboardContent = () => {
                                             {editingTemplate === template.id ? (
                                                 <div className="space-y-4">
                                                     <div>
-                                                        <label className="block text-sm font-medium text-gray-900 mb-2">Subject</label>
-                                                        <input type="text" value={templateFormData.subject || ''} onChange={(e) => setTemplateFormData({ ...templateFormData, subject: e.target.value })} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                                        <label className="block text-sm font-medium text-slate-900 mb-2">Subject</label>
+                                                        <input type="text" value={templateFormData.subject || ''} onChange={(e) => setTemplateFormData({ ...templateFormData, subject: e.target.value })} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D]" />
                                                     </div>
                                                     <div>
-                                                        <label className="block text-sm font-medium text-gray-900 mb-2">Body</label>
-                                                        <textarea value={templateFormData.body || ''} onChange={(e) => setTemplateFormData({ ...templateFormData, body: e.target.value })} rows={10} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm" />
+                                                        <label className="block text-sm font-medium text-slate-900 mb-2">Body</label>
+                                                        <textarea value={templateFormData.body || ''} onChange={(e) => setTemplateFormData({ ...templateFormData, body: e.target.value })} rows={10} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C4D8D] font-mono text-sm" />
                                                     </div>
                                                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                                                        <p className="text-sm font-semibold text-blue-900 mb-2">Available Placeholders:</p>
+                                                        <p className="text-sm font-semibold text-[#1C4D8D] mb-2">Available Placeholders:</p>
                                                         <div className="flex flex-wrap gap-2">
                                                             {(template.placeholders || []).map((placeholder, index) => (
-                                                                <code key={index} className="px-2 py-1 bg-white rounded text-xs text-blue-900 border border-blue-300">{placeholder}</code>
+                                                                <code key={index} className="px-2 py-1 bg-white rounded text-xs text-[#1C4D8D] border border-blue-300">{placeholder}</code>
                                                             ))}
                                                         </div>
                                                     </div>
                                                     <div className="flex gap-3">
-                                                        <button onClick={() => updateEmailTemplate(template.id, templateFormData)} className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Save Changes</button>
-                                                        <button onClick={() => { setEditingTemplate(null); setTemplateFormData({}); }} className="px-6 py-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition-colors">Cancel</button>
+                                                        <button onClick={() => updateEmailTemplate(template.id, templateFormData)} className="px-6 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">Save Changes</button>
+                                                        <button onClick={() => { setEditingTemplate(null); setTemplateFormData({}); }} className="px-6 py-2 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition-colors">Cancel</button>
                                                     </div>
                                                 </div>
                                             ) : (
                                                 <div className="space-y-3">
                                                     <div>
-                                                        <p className="text-sm font-semibold text-gray-900 mb-1">Subject:</p>
-                                                        <p className="text-sm text-gray-500">{template.subject}</p>
+                                                        <p className="text-sm font-semibold text-slate-900 mb-1">Subject:</p>
+                                                        <p className="text-sm text-slate-500">{template.subject}</p>
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm font-semibold text-gray-900 mb-1">Body:</p>
-                                                        <pre className="text-sm text-gray-500 bg-gray-50 p-3 rounded-lg whitespace-pre-wrap">{template.body}</pre>
+                                                        <p className="text-sm font-semibold text-slate-900 mb-1">Body:</p>
+                                                        <pre className="text-sm text-slate-500 bg-slate-50 p-3 rounded-lg whitespace-pre-wrap">{template.body}</pre>
                                                     </div>
                                                 </div>
                                             )}

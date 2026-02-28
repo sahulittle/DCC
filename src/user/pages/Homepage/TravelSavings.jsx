@@ -9,7 +9,7 @@ const TravelSavings = () => {
       id: 'hotel_1',
       image: '/assets/images/pexels-rachel-brooks-2149232858-30892607-1770615369773.jpg',
       alt: 'Arc de Triomphe in Paris, France - iconic monument and landmark',
-      hotelName: '████████ Hotel',
+      hotelName: 'Hotel',
       location: 'Paris area',
       stars: 4,
       landmark: 'Near Eiffel Tower',
@@ -29,7 +29,7 @@ const TravelSavings = () => {
       id: 'hotel_2',
       image: '/assets/images/pexels-solce-34773149-1770615491422.jpg',
       alt: 'Eiffel Tower in Paris with Seine river and bridge in foreground - iconic French landmark',
-      hotelName: '██████ Boutique',
+      hotelName: ' Boutique',
       location: 'Paris area',
       stars: 5,
       landmark: 'Near Louvre Museum',
@@ -142,7 +142,7 @@ const TravelSavings = () => {
           </h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto relative z-10">
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 flex items-center gap-5 border border-white/10">
-              <div className="w-14 h-14 bg-primary/20 text-primary rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-14 h-14 bg-primary/20 text-white rounded-lg flex items-center justify-center flex-shrink-0">
                 <Icon name="CalendarDaysIcon" size={28} />
               </div>
               <div>
@@ -151,7 +151,7 @@ const TravelSavings = () => {
               </div>
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 flex items-center gap-5 border border-white/10">
-              <div className="w-14 h-14 bg-primary/20 text-primary rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-14 h-14 bg-primary/20 text-white rounded-lg flex items-center justify-center flex-shrink-0">
                 <Icon name="CalendarDaysIcon" size={28} />
               </div>
               <div>

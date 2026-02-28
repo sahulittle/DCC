@@ -45,7 +45,7 @@ const RollUpSection = () => {
           {/* Left Column: Big Picture Summary */}
           <div className="bg-white/5 backdrop-blur-md rounded-3xl p-10 md:p-12 border border-white/10 shadow-2xl animate-fade-up animation-delay-100">
             <div className="text-center space-y-2">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 text-primary rounded-full text-sm font-semibold">
+              <div className="inline-flex items-center text-white gap-2 px-4 py-2 bg-primary/20 text-primary rounded-full text-sm font-semibold">
                 <Icon name="CalculatorIcon" size={20} />
                 The Math
               </div>
