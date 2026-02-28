@@ -53,14 +53,14 @@ const Header = () => {
                     : 'bg-white/80 backdrop-blur-sm'
                 }`}
         >
-            <div className="max-w-7xl h-[89px] mx-auto px-4">
-                <div className="flex items-center justify-between h-full">
+            <div className="max-w-8xl mx-auto px-4">
+                <div className="flex items-center justify-between h-20 md:h-24 lg:h-28">
                     {/* Logo */}
                     <Link to={'/'} className="flex items-center gap-3 -ml-4">
                         <AppImage
                             src={logo}
                             alt="Discount Club Cayman Logo"
-                            className="w-52 h-52 object-contain"
+                            className="w-60 md:w-72 lg:w-96 h-auto max-h-52 md:max-h-56 lg:max-h-64 object-contain"
                         />
                     </Link>
 
@@ -105,7 +105,7 @@ const Header = () => {
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="lg:hidden p-2 text-slate-800"
+                        className="lg:hidden p-2 text-slate-800 focus:outline-none"
                         aria-label="Toggle menu"
                     >
                         <Icon name={isMobileMenuOpen ? 'XMarkIcon' : 'Bars3Icon'} size={24} />
@@ -114,7 +114,7 @@ const Header = () => {
 
                 {/* Mobile Menu */}
                 {isMobileMenuOpen && (
-                    <div className="lg:hidden py-6 border-t border-slate-200">
+                    <div className="lg:hidden py-4 border-t border-slate-200 max-h-[calc(100vh-90px)] overflow-y-auto">
                         <nav className="flex flex-col gap-1">
                             {navLinks.map((link) => (
                                 <Link
@@ -129,8 +129,8 @@ const Header = () => {
                                     {link.label}
                                 </Link>
                             ))}
-                            <div className="flex flex-col gap-4 pt-6 mt-4 border-t border-slate-200">
-                                <div className="grid grid-cols-2 gap-4">
+                            <div className="flex flex-col gap-4 pt-4 mt-2 border-t border-slate-200">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-2">
                                     <Link
                                         to="/login"
                                         onClick={() => setIsMobileMenuOpen(false)}

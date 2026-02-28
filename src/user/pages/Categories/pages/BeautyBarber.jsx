@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 
 const BeautyBarber = () => {
-    const [selectedStore, setSelectedStore] = useState(null);
+  const [selectedStore, setSelectedStore] = useState(null);
 
-    const stores = [
-        { id: 1, name: "George Carvalho", image: "https://web.archive.org/web/20161021122644im_/https://clubsave.ky/media/GC_logo240.jpg", description: "George Carvalho International Beauty Salon & Spa is a full service salon and spa located on Seven Mile Beach.For all your hair needs: coloring, cutting, straightening, formal wear for all occasions. Beauty needs: facial, waxing, lash extensions & make up.", phone: "946-1912", email: "info@georgecarvalho.ky" },
-        { id: 2, name: "Focus Hair & Beauty", image: "https://web.archive.org/web/20161021122644im_/https://clubsave.ky/media/FOCUS_hair__beauty_logo240.png", description: "Experience Grand Cayman's finest hair stylists, colourists and beauty therapists... We FOCUS our attention on you with first-class hairstyles, facials, massages, manicures, pedicures and more – all in our relaxing, friendly salon found just off Seven Mile Beach.", phone: "943-6287", email: "info@focussalon.com" },
-        { id: 3, name: "Tatianna's Heaven on Earth Beauty Salon", image: "https://web.archive.org/web/20161021122644im_/https://clubsave.ky/media/Tatiannas_Heaven_on_Earth_240_new.jpg", description: "With a well known name in Cayman, Tatianna's Heaven on Earth Beauty Salon speaks for itself. Ladies when in need to pamper yourself, look no further, come and see us today. Men we offer professional business hair cuts that are known to impress.", phone: "946-7522/945-7522", email: "tatiannasbeauty@candw.ky" },
-        { id: 4, name: "Club Save", image: "https://web.archive.org/web/20161021122644im_/https://clubsave.ky/media/Club_Save__Logo_for_website_240x240_K6YErZi.jpg", description: "Our website is the only platform built strictly for people to view dozens of promotional ads from local businesses. You can always view sales or upcoming events that our business members are having, which results in saving money! We also offer memberships to both people and businesses in the Cayman Islands.", phone: "+1 (345) 943-6287", email: "appointments@focus.ky" }
-    ];
-    return (
-        <div id="beauty" className="container mx-auto px-4 py-8 -mt-24">
+  const stores = [
+    { id: 1, name: "George Carvalho", image: "https://web.archive.org/web/20161021122644im_/https://clubsave.ky/media/GC_logo240.jpg", description: "George Carvalho International Beauty Salon & Spa is a full service salon and spa located on Seven Mile Beach.For all your hair needs: coloring, cutting, straightening, formal wear for all occasions. Beauty needs: facial, waxing, lash extensions & make up.", phone: "946-1912", email: "info@georgecarvalho.ky" },
+    { id: 2, name: "Focus Hair & Beauty", image: "https://web.archive.org/web/20161021122644im_/https://clubsave.ky/media/FOCUS_hair__beauty_logo240.png", description: "Experience Grand Cayman's finest hair stylists, colourists and beauty therapists... We FOCUS our attention on you with first-class hairstyles, facials, massages, manicures, pedicures and more – all in our relaxing, friendly salon found just off Seven Mile Beach.", phone: "943-6287", email: "info@focussalon.com" },
+    { id: 3, name: "Tatianna's Heaven on Earth Beauty Salon", image: "https://web.archive.org/web/20161021122644im_/https://clubsave.ky/media/Tatiannas_Heaven_on_Earth_240_new.jpg", description: "With a well known name in Cayman, Tatianna's Heaven on Earth Beauty Salon speaks for itself. Ladies when in need to pamper yourself, look no further, come and see us today. Men we offer professional business hair cuts that are known to impress.", phone: "946-7522/945-7522", email: "tatiannasbeauty@candw.ky" },
+    { id: 4, name: "Club Save", image: "https://web.archive.org/web/20161021122644im_/https://clubsave.ky/media/Club_Save__Logo_for_website_240x240_K6YErZi.jpg", description: "Our website is the only platform built strictly for people to view dozens of promotional ads from local businesses. You can always view sales or upcoming events that our business members are having, which results in saving money! We also offer memberships to both people and businesses in the Cayman Islands.", phone: "+1 (345) 943-6287", email: "appointments@focus.ky" }
+  ];
+  return (
+    <div id="beauty" className="container mx-auto px-4 py-8 -mt-0">
       <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Beauty & Barber</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {stores.map((store) => (
@@ -50,7 +50,7 @@ const BeautyBarber = () => {
         </div>
       )}
     </div>
-    )
+  )
 }
 
 export default BeautyBarber

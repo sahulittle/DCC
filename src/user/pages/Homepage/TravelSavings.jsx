@@ -70,8 +70,8 @@ const TravelSavings = () => {
             >
               {/* Hotel Image */}
               <div className="relative h-64 overflow-hidden">
-                <AppImage
-                  src={hotel?.image}
+                <img
+                  src="https://www.luxuryabode.com/mona/img/hotels.jpg"
                   alt={hotel?.alt}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />

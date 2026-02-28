@@ -202,9 +202,6 @@ const SignupContent = () => {
                                         type="button"
                                         onClick={() => setStep(2)}
                                         className="w-full px-8 py-4 bg-[#1C4D8D] text-white rounded-xl font-bold text-lg hover:bg-[#4988C4] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2"
-                                        onClick={() => alert('Signup is disabled.')}
-                                        disabled
-                                        className="w-full px-8 py-4 bg-slate-400 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 cursor-not-allowed"
                                     >
                                         Continue
                                         <Icon name="ArrowRightIcon" size={20} />
@@ -311,9 +308,6 @@ const SignupContent = () => {
                                             type="button"
                                             onClick={() => setStep(planType === 'family' ? 3 : 4)}
                                             className="flex-1 px-6 py-3 bg-[#1C4D8D] text-primary-foreground rounded-xl font-bold hover:bg-[#1C4D8D]/90 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-                                            onClick={() => alert('Signup is disabled.')}
-                                            disabled
-                                            className="flex-1 px-6 py-3 bg-slate-400 text-primary-foreground rounded-xl font-bold hover:bg-[#1C4D8D]/90 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 cursor-not-allowed"
                                         >
                                             Continue
                                             <Icon name="ArrowRightIcon" size={20} />
@@ -410,9 +404,6 @@ const SignupContent = () => {
                                             type="button"
                                             onClick={() => setStep(4)}
                                             className="flex-1 px-6 py-3 bg-[#1C4D8D] text-primary-foreground rounded-xl font-bold hover:bg-[#1C4D8D]/90 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-                                            onClick={() => alert('Signup is disabled.')}
-                                            disabled
-                                            className="flex-1 px-6 py-3 bg-slate-400 text-primary-foreground rounded-xl font-bold hover:bg-[#1C4D8D]/90 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 cursor-not-allowed"
                                         >
                                             Continue
                                             <Icon name="ArrowRightIcon" size={20} />
@@ -505,8 +496,6 @@ const SignupContent = () => {
                                         <button
                                             type="submit"
                                             className="flex-1 px-6 py-3 bg-[#1C4D8D] text-primary-foreground rounded-xl font-bold hover:bg-[#1C4D8D]/90 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-                                            disabled
-                                            className="flex-1 px-6 py-3 bg-slate-400 text-primary-foreground rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 cursor-not-allowed"
                                         >
                                             Complete Purchase
                                             <Icon name="LockClosedIcon" size={18} />

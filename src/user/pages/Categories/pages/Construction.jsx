@@ -11,7 +11,7 @@ const Construction = () => {
         { id: 5, name: "Artic Air Conditoning Plumbing & Maintenance", image: "https://web.archive.org/web/20161021122644im_/https://clubsave.ky/media/Artic_Airconditioning.jpg", description: "Artic Air Conditioning Plumbing & Maintenance \"24 HRS SERVICE\" is a very friendly, reliable and professional company. Our aim is to keep our customers cool and comfortable with our high efficiency air conditioning units at very reasonable prices.", phone: "917-0350", email: "cayman@bcqs.com" }
     ];
     return (
-        <div id="construction" className="container mx-auto px-4 py-8 -mt-24">
+        <div id="construction" className="container mx-auto px-4 py-8 -mt-0">
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Construction</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {companies.map((company) => (

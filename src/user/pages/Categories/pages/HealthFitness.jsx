@@ -11,7 +11,7 @@ const HealthFitness = () => {
     ];
 
     return (
-        <div id="health" className="container mx-auto px-4 py-8 -mt-24">
+        <div id="health" className="container mx-auto px-4 py-8 -mt-0">
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Health & Fitness</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {venues.map((venue) => (

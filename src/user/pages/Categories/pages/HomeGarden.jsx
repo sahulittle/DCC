@@ -16,7 +16,7 @@ const HomeGarden = () => {
         { id: 10, name: "Perfect Mobile Pressure Washing & Car Wash", image: "https://web.archive.org/web/20170128144422im_/https://clubsave.ky/media/Perfect_Mobile_Pressure_Washing_logo_240X2402_7D2LSsC.jpg", description: "A local favorite for home goods, hardware, cleaning supplies, and everyday essentials at great prices.", phone: "922-3807 / 325-5205 / 922-7234", email: "perfect.designs@hotmail.com" }
     ];
     return (
-        <div id="home" className="container mx-auto px-4 py-8 -mt-24">
+        <div id="home" className="container mx-auto px-4 py-8 -mt-0">
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Home & Garden</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {stores.map((store) => (

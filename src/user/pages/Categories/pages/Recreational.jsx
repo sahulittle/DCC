@@ -12,7 +12,7 @@ const Recreational = () => {
         { id: 6, name: "Paradise Vapors", image: "https://web.archive.org/web/20170127203441im_/https://clubsave.ky/media/paradisevaporsnew_240x240_hGGA5mq.jpg", description: "Tired of smoking cigarettes but find it hard to kick that nicotine craving? Come and see us as we stock a wide variety of electronic cigarettes. We also carry sub ohm box mods for huge clouds.", phone: "938-8273", email: "Info@paradisevapors.com.ky" }
     ];
     return (
-        <div id="fashion" className="container mx-auto px-4 py-8 -mt-24">
+        <div id="fashion" className="container mx-auto px-4 py-8 -mt-0">
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Recreational</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {stores.map((store) => (

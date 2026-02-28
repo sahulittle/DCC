@@ -20,7 +20,7 @@ const Retail = () => {
         { id: 14, name: "The NO.1 Shoe Shop", image: "https://web.archive.org/web/20161021122644im_/https://clubsave.ky/media/The_No.1_Shoe_shop_240new_0u8rrKF.jpg", description: "STYLE & FASHION SHOES FOR EVERY OCCASION... We are a family owned & operated company that specializes in athletic, casual and dress shoe retailing and repair.", phone: "949-5595", email: "No1shoes@gmail.ky" }
     ];
     return (
-        <div id="retail" className="container mx-auto px-4 py-8 -mt-24">
+        <div id="retail" className="container mx-auto px-4 py-8 -mt-0">
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Retail</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {stores.map((store) => (

@@ -11,7 +11,7 @@ const Electronicsoffice = () => {
         { id: 5, name: "Lee's Office Products", image: "https://web.archive.org/web/20170128171224im_/https://clubsave.ky/media/LEES_LOGO_NEW240.jpg", description: "The one-stop shop for all your office supplies and printing needs. Offering a wide range of office, school supplies. Special orders are also available per your request. We also provide printing services such as flyers, banners, rack cards, vehicle wraps and more!", phone: "949-2303", email: "sales_leesofficeproducts@candw.ky" }
     ];
     return (
-        <div id="electronics" className="container mx-auto px-4 py-8 -mt-24">
+        <div id="electronics" className="container mx-auto px-4 py-8 -mt-0">
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Electronics & Office</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {stores.map((store) => (

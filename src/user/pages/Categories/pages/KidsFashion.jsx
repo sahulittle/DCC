@@ -18,8 +18,8 @@ const KidsFashion = () => {
         { id: 12, name: "Ld's Sewing & Fashion Boutique", image: "https://web.archive.org/web/20170127082155im_/https://clubsave.ky/media/Lds_New_Logo.jpg", description: "Ld's Sewing wants to be your preferred choice for all your dressmaking and alteration needs. We are one of the only stores in the area to offer SAME DAY SERVICE to meet your last minute alteration needs.", phone: "323-1041", email: "ldsewing@yahoo.com" }
     ];
     return (
-        <div id="kids" className="container mx-auto px-4 py-8 -mt-24">
-            <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Kids & Recreational</h2>
+        <div id="kids" className="container mx-auto px-4 py-8 -mt-0">
+            <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Kids & Fashion</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {kidsActivities.map((activity) => (
                     <div key={activity.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">

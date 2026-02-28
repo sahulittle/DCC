@@ -73,7 +73,6 @@ const MemberShipFormContent = () => {
 
   const handleIndividualNext = () => {
     setError('');
-    setError('Membership form is currently disabled.');
     if (validateIndividualForm()) {
       setStep(2);
     }
@@ -84,7 +83,6 @@ const MemberShipFormContent = () => {
     setSuccess('');
     
     if (!validateOrganizationForm()) return;
-    setError('Membership form is currently disabled.');
 
     setLoading(true);
     try {
@@ -231,7 +229,7 @@ const MemberShipFormContent = () => {
                 </div>
                 <p className="text-3xl font-heading font-bold text-slate-900">
                   $119.99
-                  <span className="text-lg text-slate-500 font-normal">/member/year</span>
+                  <span className="text-lg text-slate-500 font-normal">/year</span>
                 </p>
               </button>
 
@@ -255,7 +253,7 @@ const MemberShipFormContent = () => {
                 </div>
                 <p className="text-3xl font-heading font-bold text-slate-900">
                   $119.99
-                  <span className="text-lg text-slate-500 font-normal">/member/year</span>
+                  <span className="text-lg text-slate-500 font-normal">/year</span>
                 </p>
               </button>
             </div>
@@ -371,9 +369,6 @@ const MemberShipFormContent = () => {
                   type="button"
                   onClick={handleIndividualNext}
                   className="w-full px-8 py-4 bg-[#1C4D8D] text-white rounded-xl font-bold text-lg hover:bg-[#1C4D8D]/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2"
-                  onClick={() => setError('Membership form is currently disabled.')}
-                  disabled
-                  className="w-full px-8 py-4 bg-slate-400 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 cursor-not-allowed"
                 >
                   Continue to Payment
                   <Icon name="ArrowRightIcon" size={20} />
@@ -486,14 +481,9 @@ const MemberShipFormContent = () => {
                   onClick={handleOrganizationSubmit}
                   disabled={loading}
                   className="w-full px-8 py-4 bg-[#1C4D8D] text-white rounded-xl font-bold text-lg hover:bg-[#1C4D8D]/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-50"
-                  onClick={() => setError('Membership form is currently disabled.')}
-                  disabled
-                  className="w-full px-8 py-4 bg-slate-400 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 cursor-not-allowed"
                 >
                   {loading ? 'Submitting...' : 'Submit Application'}
                   {!loading && <Icon name="ArrowRightIcon" size={20} />}
-                  Submit Application
-                  <Icon name="ArrowRightIcon" size={20} />
                 </button>
               </div>
             )}
